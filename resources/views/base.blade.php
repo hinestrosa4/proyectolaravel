@@ -8,14 +8,14 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/portfolio">Portfolio</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand active" href="#">Nosecaen S.L.</a>
+              <a class="nav-link active" href="{{ route('formRegEmpleado') }}">Añadir Empleado</a>
+              <a class="nav-link" href="{{ route('formRegCliente') }}">Añadir Cliente</a>
+              <a class="nav-link" href="{{ route('formMantenimiento') }}">Servicio Mantenimiento</a>
+            </div>
+      </nav>
     @yield('menu')
 </body>
 </html>

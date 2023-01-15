@@ -12,7 +12,7 @@
 
     <div class="col-md-4">
       <label for="validationCustom02" class="form-label">Nombre completo</label>
-      <input type="text" name="nombre" class="form-control" id="nombre" value="{{ old('nombre') }}" placeholder="Nombre">
+      <input type="text" name="nombre" class="form-control" id="nombre" value="{{ old('nombre') }}" placeholder="Apellidos, Nombre">
       {!! $errors->first('nombre','<span style=color:red>:message</span>') !!}
     </div>
 
@@ -60,7 +60,7 @@
     </div>
 
     <div class="col-12">
-      <button class="btn btn-primary" type="submit">Enviar Formulario</button>
+      <button class="btn btn-success" type="submit">Enviar Formulario</button>
     </div>
   </form>
 @endsection

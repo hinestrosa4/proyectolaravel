@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Rules\Validaciones;
 use Illuminate\Http\Request;
 
-class DatosFormRegEmpleadoController extends Controller
+class ValidarFormRegEmpleadoController extends Controller
 {
-    public function store(Request $request)
+    public function store()
     {
-        
-        $request->validate([
+        request()->validate([
             'dni' => ['required', function ($attribute, $value, $fail) {
                 $validarDNI = new Validaciones();
                 if (!$validarDNI->validateDni($value)) {
