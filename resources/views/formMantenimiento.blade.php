@@ -1,4 +1,4 @@
-@section('title','Registro Empleados')
+@section('title','Cuota Mantenimiento')
 @extends('base')
 @section('menu')
 <h1>Servicio de Mantenimiento</h1>
@@ -41,7 +41,7 @@
 
     <div class="col-md-4">
         <label for="validationCustom03" class="form-label">Fecha de pago</label>
-        <input type="text" name="fechaPago" class="form-control" id="fechaPago" value="{{ old('fechaPago') }}" placeholder="Fecha pago">
+        <input type="date" name="fechaPago" class="form-control" id="fechaPago" value="{{ old('fechaPago') }}" placeholder="Fecha pago">
         {!! $errors->first('fechaPago','<span style=color:red>:message</span>') !!}
     </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empleado;
 use App\Http\Rules\Validaciones;
 use Illuminate\Http\Request;
 
@@ -9,20 +10,23 @@ class ValidarFormRegEmpleadoController extends Controller
 {
     public function store()
     {
-        request()->validate([
-            'dni' => ['required', function ($attribute, $value, $fail) {
+        $datos = request()->validate([
+            'nif' => ['required', function ($attribute, $value, $fail) {
                 $validarDNI = new Validaciones();
                 if (!$validarDNI->validateDni($value)) {
-                    $fail("The ".$attribute.' is invalid.');
+                    $fail("The " . $attribute . ' is invalid.');
                 }
             }],
             'nombre' => 'required|min:3',
-            'direccion' => 'required|min:5',
+            'clave' => 'required|min:5',
+            'fecha_alta' => 'required',
             'correo' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
-            'tipo' => 'required|in:op,admin',
+            'es_admin' => 'required',
         ]);
 
-        return view('formRegEmpleado');
+        Empleado::create($datos);
+        session()->flash('message', 'El empleado ha sido registrado correctamente');
+        return redirect()->route('formRegEmpleado');
     }
 }

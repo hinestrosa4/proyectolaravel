@@ -14,6 +14,7 @@
               <a class="nav-link active" href="{{ route('formRegEmpleado') }}">Añadir Empleado</a>
               <a class="nav-link" href="{{ route('formRegCliente') }}">Añadir Cliente</a>
               <a class="nav-link" href="{{ route('formMantenimiento') }}">Servicio Mantenimiento</a>
+              <a class="nav-link" href="{{ route('formTarea') }}">Crear Tarea</a>
             </div>
       </nav>
     @yield('menu')
