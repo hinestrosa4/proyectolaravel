@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tarea;
 use App\Models\Cliente;
 use App\Models\Provincia;
 use App\Models\Empleado;
@@ -22,4 +23,21 @@ class FormTareaController extends Controller
         $empleados = Empleado::all();
         return view('formTarea', compact('clientes', 'provincias', 'empleados'));
     }
+
+    public function listar()
+    {
+        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(2);
+        return view('listaTareas', compact('tareas'));
+    }
+
+    public function confirmarBorrar(Request $request){
+        $tarea = Tarea::find($request->id);
+        return view ('confirmacionBorrar')->with('tarea', $tarea);
+    }
+
+    public function borrarTarea(Request $request){
+        Tarea::find($request->id)->delete();
+        session()->flash('message', 'La tarea ha sido borrada correctamente');
+        return redirect()->route('listaTareas');
+        }
 }

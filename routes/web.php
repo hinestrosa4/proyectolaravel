@@ -1,6 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormRegEmpleadoController;
+use App\Http\Controllers\FormRegClienteController;
+use App\Http\Controllers\FormMantenimientoController;
+use App\Http\Controllers\FormTareaController;
+use App\Http\Controllers\ValidarFormRegEmpleadoController;
+use App\Http\Controllers\ValidarFormRegClienteController;
+use App\Http\Controllers\ValidarFormMantenimientoController;
+use App\Http\Controllers\ValidarFormTareaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +22,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 //Mostrar vistas
-Route::get('/formRegEmpleado', 'App\Http\Controllers\FormRegEmpleadoController')->name('formRegEmpleado');
-Route::get('/formRegCliente', 'App\Http\Controllers\FormRegClienteController')->name('formRegCliente');
-Route::get('/formMantenimiento', 'App\Http\Controllers\FormMantenimientoController')->name('formMantenimiento');
-Route::get('/formTarea', 'App\Http\Controllers\FormTareaController')->name('formTarea');
+Route::get('/formRegEmpleado', FormRegEmpleadoController::class)->name('formRegEmpleado');
+Route::get('/formRegCliente', FormRegClienteController::class)->name('formRegCliente');
+Route::get('/formMantenimiento', FormMantenimientoController::class)->name('formMantenimiento');
+Route::get('/formTarea', FormTareaController::class)->name('formTarea');
+Route::get('/listaTareas', [FormTareaController::class, 'listar'])->name('listaTareas');
+Route::get('/confirmacionBorrar', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
+Route::get('/borrarTarea', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
 
 //Recoger datos formulario
-Route::post('formRegEmpleado', 'App\Http\Controllers\ValidarFormRegEmpleadoController@store');
-Route::post('formRegCliente', 'App\Http\Controllers\ValidarFormRegClienteController@store');
-Route::post('formMantenimiento', 'App\Http\Controllers\ValidarFormMantenimientoController@store');
-Route::post('formTarea', 'App\Http\Controllers\ValidarFormTareaController@store');
+Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store'])->name('borrarTarea');
+Route::post('formRegCliente', [ValidarFormRegClienteController::class, 'store']);
+Route::post('formMantenimiento', [ValidarFormMantenimientoController::class, 'store']);
+Route::post('formTarea', [ValidarFormTareaController::class, 'store']);

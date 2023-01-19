@@ -1,9 +1,16 @@
 @section('title','Cuota Mantenimiento')
 @extends('base')
 @section('menu')
-<h1>Servicio de Mantenimiento</h1>
-<form class="row g-3 needs-validation" method="POST" action="{{ route('formMantenimiento') }}">
+
+<style>
+  #form {
+      margin: 1em;
+  }
+</style>
+
+<form id="form" class="row g-3 needs-validation" method="POST" action="{{ route('formMantenimiento') }}">
     @csrf
+    <h1>Servicio de Mantenimiento</h1>
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">Concepto</label>
       <input type="text" name="concepto" class="form-control" id="concepto" value="{{ old('concepto') }}" placeholder="Concepto">

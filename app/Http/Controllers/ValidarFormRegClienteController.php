@@ -20,7 +20,7 @@ class ValidarFormRegClienteController extends Controller
             'nombre' => 'required',
             'correo' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
-            'iban' => 'required|regex:/^ES\d{2}\s\d{4}\s\d{4}\s\d{2}\s\d{10}$/',
+            'iban' => 'required|regex:/^ES\d{2}\d{4}\d{4}\d{2}\d{10}$/',
             'cuota' => 'required|numeric',
             'pais' => 'required',
             'moneda' => 'required',
