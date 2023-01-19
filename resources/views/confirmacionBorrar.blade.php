@@ -1,4 +1,4 @@
-@section('title', 'Registro Empleados')
+@section('title', 'Confirmar Borrar')
 @extends('base')
 @section('menu')
     <style>
@@ -46,8 +46,17 @@
         </div>
     
     <p>¿Está seguro de que desea borrar esta tarea?</p>
-    <a href="{{ route('borrarTarea', ['id' => $tarea->id]) }}" class="btn btn-danger" id="delete-task-btn">Borrar</a>
-    <a href="{{ route('listaTareas') }}" class="btn btn-secondary" id="cancel-btn">Cancelar</a>
+    {{-- <a href="{{ route('borrarTarea', ['id' => $tarea->id]) }}" class="btn btn-danger" id="delete-task-btn">Borrar</a>
+    <a href="{{ route('listaTareas') }}" class="btn btn-secondary" id="cancel-btn">Cancelar</a> --}}
+
+    <div id="centrar">
+        <form action="{{ route('borrarTarea', $tarea) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Borrar</button>
+            <a class="btn btn-primary" href="{{ route('listaTareas') }}">Volver</a>
+        </form>
+    </div>
 </div>
 
    

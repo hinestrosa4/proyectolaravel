@@ -28,11 +28,16 @@ Route::get('/formRegCliente', FormRegClienteController::class)->name('formRegCli
 Route::get('/formMantenimiento', FormMantenimientoController::class)->name('formMantenimiento');
 Route::get('/formTarea', FormTareaController::class)->name('formTarea');
 Route::get('/listaTareas', [FormTareaController::class, 'listar'])->name('listaTareas');
-Route::get('/confirmacionBorrar', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
-Route::get('/borrarTarea', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
+//Route::get('/confirmacionBorrar', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
+Route::get('/confirmacionBorrar/{tarea}', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
+
+//Route::get('/borrarTarea', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
+Route::delete('/borrarTarea/{tarea}', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
+
+Route::get('tareas/{tarea}', [FormTareaController::class, 'verDetalles'])->name('verDetalles');
 
 //Recoger datos formulario
-Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store'])->name('borrarTarea');
+Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store']);
 Route::post('formRegCliente', [ValidarFormRegClienteController::class, 'store']);
 Route::post('formMantenimiento', [ValidarFormMantenimientoController::class, 'store']);
 Route::post('formTarea', [ValidarFormTareaController::class, 'store']);

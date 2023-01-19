@@ -26,18 +26,24 @@ class FormTareaController extends Controller
 
     public function listar()
     {
-        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(2);
+        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(10);
         return view('listaTareas', compact('tareas'));
     }
 
-    public function confirmarBorrar(Request $request){
-        $tarea = Tarea::find($request->id);
-        return view ('confirmacionBorrar')->with('tarea', $tarea);
+    public function confirmarBorrar(Tarea $tarea)
+    {
+        return view('confirmacionBorrar', compact('tarea'));
     }
 
-    public function borrarTarea(Request $request){
-        Tarea::find($request->id)->delete();
-        session()->flash('message', 'La tarea ha sido borrada correctamente');
+    public function borrarTarea(Tarea $tarea)
+    {
+        $tarea->delete();
+        session()->flash('message', 'La tarea ha sido borrada correctamente.');
         return redirect()->route('listaTareas');
-        }
+    }
+
+    public function verDetalles(Tarea $tarea)
+     {
+        return view('verDetalles', ['tarea' => $tarea]);
+     }
 }

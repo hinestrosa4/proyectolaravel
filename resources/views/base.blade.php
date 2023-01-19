@@ -18,55 +18,68 @@
     </script>
     <title>@yield('title')</title>
 </head>
+<style>
+    .dropdown-item {
+        transition: background-color 0.5s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #343a40;
+        /* gris oscuro */
+    }
+</style>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <h2><a class="navbar-brand text-white" href="#">Nosecaen S.L.</a></h2>
-      
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }} text-white" href="#" id="addDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Añadir
-                </a>
-                <div class="dropdown-menu" aria-labelledby="addDropdown">
-                  <a class="dropdown-item {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }} text-dark" href="{{ route('formRegEmpleado') }}">Empleado</a>
-                  <a class="dropdown-item {{ request()->routeIs('formRegCliente') ? 'active' : '' }} text-dark" href="{{ route('formRegCliente') }}">Cliente</a>
-                  <a class="dropdown-item {{ request()->routeIs('formMantenimiento') ? 'active' : '' }} text-dark" href="{{ route('formMantenimiento') }}">Servicio Mantenimiento</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {{ request()->routeIs('formTarea') ? 'active' : '' }} text-white" href="#" id="createDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Crear
-                </a>
-                <div class="dropdown-menu" aria-labelledby="createDropdown">
-                  <a class="dropdown-item {{ request()->routeIs('formTarea') ? 'active' : '' }} text-dark" href="{{ route('formTarea') }}">Tarea</a>
-                </div>
-              </li>
-              
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-white" href="#" id="listarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Listar
-                </a>
-                <div class="dropdown-menu" aria-labelledby="listarDropdown">
-                  <a class="dropdown-item {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-dark" href="{{ route('listaTareas') }}">Tarea</a>
-                </div>
-              </li>
+            <h2><a class="navbar-brand text-white" href="#">Nosecaen S.L.</a></h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav text-white">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="addDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Añadir
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
+                            <a class="dropdown-item text-white" href="{{ route('formRegEmpleado') }}">Empleado</a>
+                            <a class="dropdown-item text-white" href="{{ route('formRegCliente') }}">Cliente</a>
+                            <a class="dropdown-item text-white"
+                                href="{{ route('formMantenimiento') }}">Mantenimiento</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-white"
+                            href="#" id="createDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Crear
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
+                          <a class="dropdown-item text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-dark"
+                                href="{{ route('formTarea') }}">Tarea</a>
+                        </div>
+                    </li>
 
-              
-              
-            </ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-white"
+                            href="#" id="listarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Listar
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
+                          <a class="dropdown-item text-white {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-dark"
+                                href="{{ route('listaTareas') }}">Tarea</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            
-              </div>
-            </nav>
-        
-      
+        </div>
+    </nav>
+
+
 
 
     @yield('menu')

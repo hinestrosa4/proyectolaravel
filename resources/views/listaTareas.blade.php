@@ -3,16 +3,22 @@
 @extends('base')
 
 <style>
-      #cuerpo {
+    #cuerpo {
         margin: 1em;
     }
+
     #paginacion {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    #cuerpo{
+
+    #cuerpo {
         margin: 2em;
+    }
+
+    table {
+        text-align: center;
     }
 </style>
 
@@ -22,23 +28,22 @@
 
     <div id="cuerpo">
         <h1>Lista de Tareas</h1>
-@if (session()->has('message'))
-<div class="alert alert-success">
-    {{ session()->get('message') }}
-</div>
-@endif
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
         <div class="table-responsive">
             <table class="table">
                 <thead class="table-dark">
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Descripción</th>
-                        <th scope="col">Dirección</th>
                         <th scope="col">Población</th>
                         <th scope="col">Codigo postal</th>
-                        <th scope="col">Provincia</th>
                         <th scope="col">Operario Encargado</th>
                         <th scope="col">Fecha de realización</th>
                         <th scope="col">Opciones</th>
@@ -47,19 +52,19 @@
                 <tbody>
                     @foreach ($tareas as $tarea)
                         <tr>
+                            <td>{{ $tarea->id }}</td>
                             <td>{{ $tarea->cliente }}</td>
                             <td>{{ $tarea->nombre }}</td>
                             <td>{{ $tarea->telefono }}</td>
                             <td>{{ $tarea->descripcion }}</td>
-                            <td>{{ $tarea->direccion }}</td>
                             <td>{{ $tarea->poblacion }}</td>
                             <td>{{ $tarea->codigoPostal }}</td>
-                            <td>{{ $tarea->provincia }}</td>
                             <td>{{ $tarea->operario }}</td>
-                            <td>{{ date("d-m-Y", strtotime($tarea->fechaRealizacion)) }}</td>
-                            <td><a class="btn btn-danger" href="{{ route('confirmacionBorrar',['id' => $tarea->id]) }}">Borrar</a>&nbsp;&nbsp;<a class="btn btn-warning"
-                                    href="#">Modificar</a></td>
-                        </tr>
+                            <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
+                            <td><a class="btn btn-danger"
+                                href="{{ route('confirmacionBorrar', $tarea) }}">🗑️Borrar</a>
+                                    <a class="btn btn-warning" href="#">✏️Modificar</a>
+                                    <a href="{{ route('verDetalles', $tarea)}}" class="btn btn-primary">📃Ver detalles</a></tr>
                     @endforeach
                 </tbody>
             </table>
