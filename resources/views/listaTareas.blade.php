@@ -62,9 +62,9 @@
                             <td>{{ $tarea->operario }}</td>
                             <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
                             <td><a class="btn btn-danger"
-                                href="{{ route('confirmacionBorrar', $tarea) }}">🗑️Borrar</a>
-                                    <a class="btn btn-warning" href="#">✏️Modificar</a>
-                                    <a href="{{ route('verDetalles', $tarea)}}" class="btn btn-primary">📃Ver detalles</a></tr>
+                                href="{{ route('confirmacionBorrar', $tarea) }}">🗑️</a>
+                                    <a class="btn btn-warning" href="#">✏️</a>
+                                    <a href="{{ route('verDetalles', $tarea)}}" class="btn btn-primary">📃</a></tr>
                     @endforeach
                 </tbody>
             </table>

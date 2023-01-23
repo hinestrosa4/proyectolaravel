@@ -30,7 +30,7 @@
 
 
 <div id="cuerpo">
-    <h1>Detalles de la tarea</h1>
+    <h1>Detalles de la tarea {{ $tarea->id }}</h1>
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}

@@ -32,7 +32,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <h2><a class="navbar-brand text-white" href="#">Nosecaen S.L.</a></h2>
+            <h2><a class="navbar-brand text-white" href="#">NOSECAEN S.L.</a></h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,38 +40,33 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav text-white">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="addDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white text-white" href="#" id="listarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Añadir
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
-                            <a class="dropdown-item text-white" href="{{ route('formRegEmpleado') }}">Empleado</a>
-                            <a class="dropdown-item text-white" href="{{ route('formRegCliente') }}">Cliente</a>
-                            <a class="dropdown-item text-white"
-                                href="{{ route('formMantenimiento') }}">Mantenimiento</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-white"
-                            href="#" id="createDropdown" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Crear
-                        </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
-                          <a class="dropdown-item text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-dark"
+                            <a class="dropdown-item text-white {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
+                                href="{{ route('formRegEmpleado') }}">Empleado</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
+                                href="{{ route('formRegCliente') }}">Cliente</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('formMantenimiento') ? 'active' : '' }}"
+                                href="{{ route('formMantenimiento') }}">Servicio
+                                Mantenimiento</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-dark"
                                 href="{{ route('formTarea') }}">Tarea</a>
                         </div>
                     </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-white"
                             href="#" id="listarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             Listar
                         </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
-                          <a class="dropdown-item text-white {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-dark"
+                        <div class="dropdown-menu bg-dark" aria-labelledby="listDropdown">
+                            <a class="dropdown-item text-white {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-dark"
                                 href="{{ route('listaTareas') }}">Tarea</a>
+                                <a class="dropdown-item text-white {{ request()->routeIs('listaClientes') ? 'active' : '' }} text-dark"
+                                    href="{{ route('listaClientes') }}">Cliente</a>
                         </div>
                     </li>
                 </ul>

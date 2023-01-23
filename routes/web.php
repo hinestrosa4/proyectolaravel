@@ -9,6 +9,7 @@ use App\Http\Controllers\ValidarFormRegEmpleadoController;
 use App\Http\Controllers\ValidarFormRegClienteController;
 use App\Http\Controllers\ValidarFormMantenimientoController;
 use App\Http\Controllers\ValidarFormTareaController;
+use App\Http\Controllers\FormClienteController;
 
 
 /*
@@ -28,12 +29,9 @@ Route::get('/formRegCliente', FormRegClienteController::class)->name('formRegCli
 Route::get('/formMantenimiento', FormMantenimientoController::class)->name('formMantenimiento');
 Route::get('/formTarea', FormTareaController::class)->name('formTarea');
 Route::get('/listaTareas', [FormTareaController::class, 'listar'])->name('listaTareas');
-//Route::get('/confirmacionBorrar', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
 Route::get('/confirmacionBorrar/{tarea}', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
-
-//Route::get('/borrarTarea', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
+Route::get('/listaClientes', [FormClienteController::class, 'listar'])->name('listaClientes');
 Route::delete('/borrarTarea/{tarea}', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
-
 Route::get('tareas/{tarea}', [FormTareaController::class, 'verDetalles'])->name('verDetalles');
 
 //Recoger datos formulario

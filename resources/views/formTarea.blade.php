@@ -1,19 +1,19 @@
 @section('title', 'Formulario Tarea')
 @extends('base')
 @section('menu')
-<style>
-    #form {
-        margin: 1em;
-    }
-</style>
+    <style>
+        #form {
+            margin: 1em;
+        }
+    </style>
     <form id="form" class="row g-3 needs-validation" method="POST" action="{{ route('formTarea') }}">
         @csrf
         <h1>Crear Tarea</h1>
         @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
         <div class="col-md-4">
             <label for="validationCustom04" class="form-label">Cliente</label>
             <select class="form-select" name="cliente">
@@ -23,8 +23,8 @@
                 @endforeach
             </select>
         </div>
-<br>
-<h3>Persona de contacto</h3>
+        <br>
+        <h3>Persona de contacto</h3>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Nombre Completo</label>
             <input type="text" name="nombre" class="form-control" id="nombre" value="{{ old('nombre') }}"
@@ -105,15 +105,15 @@
             <select class="form-select" name="operario">
                 @foreach ($empleados as $empleado)
                     @if ($empleado->es_admin == 0)
-                        <option value="{{ $empleado->nif }}"
-                            {{ old('operario') == $empleado->nif ? 'selected' : '' }}>{{ $empleado->nombre }}
+                        <option value="{{ $empleado->nif }}" {{ old('operario') == $empleado->nif ? 'selected' : '' }}>
+                            {{ $empleado->nombre }}
                         </option>
                     @endif
                 @endforeach
             </select>
             {!! $errors->first('operario', '<span style=color:red>:message</span>') !!}
         </div>
-        
+
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Fecha de realización</label>
             <input type="date" name="fechaRealizacion" class="form-control" id="fechaRealizacion"

@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cuota;
 use Illuminate\Http\Request;
 
 class ValidarFormMantenimientoController extends Controller
 {
-    public function store(){
-        request()->validate([
+    public function store()
+    {
+        $datos = request()->validate([
+            'clientes_id' => 'required',
             'concepto' => 'required',
             'fechaEmision' => 'required',
-            'importe' => 'required',
+            'importe' => 'required|numeric',
             'pagada' => '',
             'fechaPago' => 'required',
             'notas' => 'required',
         ]);
 
-        return view('formMantenimiento');
+        Cuota::create($datos);
+        session()->flash('message', 'La cuota ha sido registrado correctamente');
+        return redirect()->route('formMantenimiento');
     }
 }

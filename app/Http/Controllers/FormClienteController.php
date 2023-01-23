@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 
-class FormMantenimientoController extends Controller
+class FormClienteController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,7 +15,12 @@ class FormMantenimientoController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $clientes = Cliente::all();
-        return view('formMantenimiento', compact('clientes'));
+        //
+    }
+
+    public function listar()
+    {
+        $clientes = Cliente::orderBy('id', 'asc')->paginate(10);
+        return view('listaClientes', compact('clientes'));
     }
 }
