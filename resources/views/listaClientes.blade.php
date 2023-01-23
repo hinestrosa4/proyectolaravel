@@ -39,7 +39,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Correo</th>
-                        {{-- <th scope="col">IBAN</th> --}}
+                        <th scope="col">IBAN</th>
                         <th scope="col">Cuota</th>
                         {{-- <th scope="col">Pais</th> --}}
                         <th scope="col">Moneda</th>
@@ -54,14 +54,13 @@
                             <td>{{ $cliente->nombre }}</td>
                             <td>{{ $cliente->telefono }}</td>
                             <td>{{ $cliente->correo }}</td>
-                            {{-- <td>{{ $cliente->iban }}</td> --}}
+                            <td>{{ $cliente->iban }}</td>
                             <td>{{ $cliente->cuota }}€</td>
                             {{-- <td>{{ $cliente->pais }}</td> --}}
                             <td>{{ $cliente->moneda }}</td>
                             <td><a class="btn btn-danger"
-                                href="{{ route('confirmacionBorrar', $cliente) }}">🗑️</a>
+                                href="{{ route('confirmacionBorrarCliente', $cliente) }}">🗑️</a>
                                     <a class="btn btn-warning" href="#">✏️</a>
-                                    <a href="{{ route('verDetalles', $cliente)}}" class="btn btn-primary">📃</a></tr>
                     @endforeach
                 </tbody>
             </table>

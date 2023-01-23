@@ -2,6 +2,9 @@
 @extends('base')
 @section('menu')
     <style>
+        table {
+            text-align: center;
+        }
         #form {
             margin: 1em;
         }
