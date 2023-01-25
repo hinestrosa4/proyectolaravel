@@ -52,7 +52,7 @@
                             <td>{{ $empleado->nif }}</td>
                             <td>{{ $empleado->nombre }}</td>
                             <td>{{ $empleado->clave }}</td>
-                            <td>{{ $empleado->fecha_alta }}</td>
+                            <td>{{ date('d-m-Y', strtotime($empleado->fecha_alta)) }}</td>
                             <td>{{ $empleado->correo }}</td>
                             <td>{{ $empleado->telefono }}</td>
                             @if ($empleado->es_admin == 1)

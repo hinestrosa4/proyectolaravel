@@ -31,6 +31,7 @@ Route::get('/formMantenimiento', FormMantenimientoController::class)->name('form
 Route::get('/formTarea', FormTareaController::class)->name('formTarea');
 Route::get('/listaTareas', [FormTareaController::class, 'listar'])->name('listaTareas');
 Route::get('/listaClientes', [FormClienteController::class, 'listar'])->name('listaClientes');
+Route::get('/listaCuotas', [FormMantenimientoController::class, 'listar'])->name('listaCuotas');
 Route::get('/listaEmpleados', [FormEmpleadosController::class, 'listar'])->name('listaEmpleados');
 Route::get('tareas/{tarea}', [FormTareaController::class, 'verDetalles'])->name('verDetalles');
 
@@ -41,6 +42,10 @@ Route::get('/confirmacionBorrarEmpleado/{empleado}', [FormEmpleadosController::c
 Route::delete('/borrarEmpleado/{empleado}', [FormEmpleadosController::class, 'borrarEmpleado'])->name('borrarEmpleado');
 Route::get('/confirmacionBorrarCliente/{cliente}', [FormClienteController::class, 'confirmarBorrar'])->name('confirmacionBorrarCliente');
 Route::delete('/borrarCliente/{cliente}', [FormClienteController::class, 'borrarCliente'])->name('borrarCliente');
+
+//Editar
+Route::get('formTareaEdit/{tarea}/editar', [FormTareaController::class, 'edit'])->name('formTareaEdit');
+Route::put('/formTareaUpdate/{tarea}', [FormTareaController::class, 'update'])->name('formTareaUpdate');
 
 //Recoger datos formulario
 Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store']);

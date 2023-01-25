@@ -64,11 +64,13 @@
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="listDropdown">
                             <a class="dropdown-item text-white {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-dark"
-                                href="{{ route('listaTareas') }}">Tarea</a>
+                                href="{{ route('listaTareas') }}">Tareas</a>
                             <a class="dropdown-item text-white {{ request()->routeIs('listaClientes') ? 'active' : '' }} text-dark"
-                                href="{{ route('listaClientes') }}">Cliente</a>
+                                href="{{ route('listaClientes') }}">Clientes</a>
                             <a class="dropdown-item text-white {{ request()->routeIs('listaEmpleados') ? 'active' : '' }} text-dark"
                                 href="{{ route('listaEmpleados') }}">Empleados</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('listaCuotas') ? 'active' : '' }} text-dark"
+                                href="{{ route('listaCuotas') }}">Cuotas</a>
                         </div>
                     </li>
                 </ul>

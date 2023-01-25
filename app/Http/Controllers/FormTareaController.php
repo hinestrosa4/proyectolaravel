@@ -43,7 +43,46 @@ class FormTareaController extends Controller
     }
 
     public function verDetalles(Tarea $tarea)
-     {
+    {
         return view('verDetalles', ['tarea' => $tarea]);
-     }
+    }
+
+    public function edit(Tarea $tarea)
+    {
+        $clientes = Cliente::all();
+        $provincias = Provincia::all();
+        $empleados = Empleado::all();
+        return view('formTareaEdit', compact('tarea', 'clientes', 'provincias', 'empleados'));
+    }
+
+    public function update(Tarea $tarea)
+    {
+        $datos = request()->validate([
+            'cliente' => 'required',
+            'nombre' => 'required|min:3',
+            'descripcion' => 'required|min:5',
+            'direccion' => 'required|min:5',
+            'poblacion' => 'required',
+            'codigoPostal' => 'required|regex:/^\d{5}(-\d{4})?$/',
+            'provincia' => 'required',
+            'estado' => 'required',
+            'operario' => 'required',
+            'fechaRealizacion' => 'required|after:now',
+            'correo' => 'required|email',
+            'anotacionesAnt' => '',
+            'anotacionesPos' => '',
+            // 'ficheroResumen' => 'required|file',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+        ]);
+
+        // $tarea->file('file');
+        // $path = $tarea->store('App\Http\recourses\files');
+        // $path = $tarea->storeAs('archivos', 'mi_archivo.jpg');
+
+
+
+        $tarea->update($datos);
+        session()->flash('message', 'La tarea ha sido actualizada correctamente.');
+        return redirect()->route('listaTareas');
+    }
 }

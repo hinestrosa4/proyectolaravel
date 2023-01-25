@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
+use App\Models\Cuota;
 use Illuminate\Http\Request;
 
 class FormMantenimientoController extends Controller
@@ -15,7 +15,13 @@ class FormMantenimientoController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $clientes = Cliente::all();
+        $clientes = Cuota::all();
         return view('formMantenimiento', compact('clientes'));
+    }
+
+    public function listar()
+    {
+        $cuotas = Cuota::orderBy('id', 'asc')->paginate(10);
+        return view('listaCuotas', compact('cuotas'));
     }
 }

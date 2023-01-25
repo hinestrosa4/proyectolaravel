@@ -67,6 +67,7 @@
                         <td class="bold">Dirección:</td>
                         <td>{{ $tarea->direccion }}</td>
                     </tr>
+                    <tr>
                     <td class="bold">Estado:</td>
                         <td>{{ $tarea->estado }}</td>
                     </tr>
@@ -80,7 +81,7 @@
                     </tr>
                     <tr>
                         <td class="bold">Fecha Creación:</td>
-                        <td>{{ $tarea->fechaCreacion }}</td>
+                        <td>{{ date('d-m-Y', strtotime($tarea->fechaCreacion)) }}</td>
                     </tr>
                     <tr>
                         <td class="bold">Codigo postal:</td>
