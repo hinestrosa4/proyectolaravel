@@ -73,7 +73,15 @@
                     </tr>
                     <tr>
                         <td class="bold">Operario Encargado:</td>
-                        <td>{{ $tarea->empleado->nombre }}</td>
+                        <td>
+                            @if (!is_null($tarea->empleado) && !is_null($tarea->empleado->deleted_at))
+                            Empleado dado de baja
+                            @elseif (!is_null($tarea->empleado))
+                                {{ $tarea->empleado->nombre }}
+                            @else
+                                Empleado no encontrado
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <td class="bold">Fecha de realización:</td>

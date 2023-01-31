@@ -19,7 +19,7 @@ class ValidarFormTareaController extends Controller
             'clientes_id' => 'required',
             'nombre' => 'required|min:3',
             'descripcion' => 'required|min:5',
-            'direccion' => 'required|min:5',
+            'direccion' => '',
             'poblacion' => 'required',
             'codigoPostal' => 'required|regex:/^\d{5}(-\d{4})?$/',
             'provincia' => 'required',

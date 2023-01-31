@@ -50,6 +50,8 @@ Route::get('formTareaEdit/{tarea}/editar', [FormTareaController::class, 'edit'])
 Route::put('/formTareaUpdate/{tarea}', [FormTareaController::class, 'update'])->name('formTareaUpdate');
 Route::get('formEmpleadoEdit/{empleado}/editar', [FormEmpleadosController::class, 'edit'])->name('formEmpleadoEdit');
 Route::put('/formEmpleadoUpdate/{empleado}', [FormEmpleadosController::class, 'update'])->name('formEmpleadoUpdate');
+Route::get('formCuotaEdit/{cuota}/editar', [FormMantenimientoController::class, 'edit'])->name('formCuotaEdit');
+Route::put('/formCuotaUpdate/{cuota}', [FormMantenimientoController::class, 'update'])->name('formCuotaUpdate');
 
 //Recoger datos formulario
 Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store']);

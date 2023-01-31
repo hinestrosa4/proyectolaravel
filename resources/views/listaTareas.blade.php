@@ -66,7 +66,15 @@
                             <td>{{ $tarea->descripcion }}</td>
                             <td>{{ $tarea->poblacion }}</td>
                             <td>{{ $tarea->codigoPostal }}</td>
-                            <td>{{ $tarea->empleado->nombre }}</td>
+                            <td>
+                                @if (!is_null($tarea->empleado) && !is_null($tarea->empleado->deleted_at))
+                                Empleado dado de baja
+                                @elseif (!is_null($tarea->empleado))
+                                    {{ $tarea->empleado->nombre }}
+                                @else
+                                    Empleado no encontrado
+                                @endif
+                            </td>
                             <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
                             <td><a class="btn btn-danger" href="{{ route('confirmacionBorrar', $tarea) }}">🗑️</a>
 

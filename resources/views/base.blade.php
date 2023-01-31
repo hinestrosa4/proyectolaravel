@@ -45,15 +45,15 @@
                             Añadir
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
-                            <a class="dropdown-item text-white {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
-                                href="{{ route('formRegEmpleado') }}">Empleado</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
-                                href="{{ route('formRegCliente') }}">Cliente</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('formMantenimiento') ? 'active' : '' }}"
-                                href="{{ route('formMantenimiento') }}">Servicio
-                                Mantenimiento</a>
                             <a class="dropdown-item text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-dark"
                                 href="{{ route('formTarea') }}">Tarea</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
+                                href="{{ route('formRegCliente') }}">Cliente</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
+                                href="{{ route('formRegEmpleado') }}">Empleado</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('formMantenimiento') ? 'active' : '' }}"
+                                href="{{ route('formMantenimiento') }}">Cuota</a>
+
                         </div>
                     </li>
                     <li class="nav-item dropdown">

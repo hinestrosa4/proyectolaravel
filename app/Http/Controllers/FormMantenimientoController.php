@@ -37,4 +37,28 @@ class FormMantenimientoController extends Controller
         session()->flash('message', 'La cuota ha sido borrada correctamente.');
         return redirect()->route('listaCuotas');
     }
+
+    public function edit($id)
+    {
+        $cuota = Cuota::findOrFail($id);
+        $clientes = Cliente::all();
+        return view('formCuotaEdit', compact('cuota','clientes'));
+    }
+
+    public function update(Cuota $cuota)
+{
+    $datos = request()->validate([
+        'clientes_id' => 'required',
+        'concepto' => 'required',
+        'fechaEmision' => 'required',
+        'importe' => 'required|numeric',
+        'pagada' => '',
+        'fechaPago' => 'required',
+        'notas' => 'required',
+    ]);
+
+    $cuota->update($datos);
+    session()->flash('message', 'La cuota ha sido actualizada correctamente.');
+    return redirect()->route('listaCuotas');
+}
 }

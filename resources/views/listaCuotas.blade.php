@@ -59,18 +59,16 @@
                                     Cliente no encontrado
                                 @endif
                             </td>
-                            
-                            
-                            
                             <td>{{ $cuota->concepto }}</td>
-                            <td>{{ $cuota->fechaEmision }}</td>
+                            <td>{{ date('d-m-Y', strtotime($cuota->fechaEmision)) }}</td>
                             <td>{{ $cuota->importe }}€</td>
                             <td>{{ $cuota->pagada }}</td>
-                            <td>{{ $cuota->fechaPago }}</td>
+                            <td>{{ date('d-m-Y', strtotime($cuota->fechaPago)) }}</td>
                             <td>{{ $cuota->notas }}</td>
                             <td><a class="btn btn-danger" href="{{ route('confirmacionBorrarCuota', $cuota) }}">🗑️</a>
-                                <a class="btn btn-warning" href="#">✏️</a></td>
-                            </tr>
+                                <a class="btn btn-warning" href="{{ route('formCuotaEdit', $cuota->id) }}">✏️</a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
