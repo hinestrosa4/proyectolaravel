@@ -16,9 +16,9 @@
         @endif
         <div class="col-md-4">
             <label for="validationCustom04" class="form-label">Cliente</label>
-            <select class="form-select" name="cliente">
+            <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->cif }}" {{ old('cliente') == $cliente->cif ? 'selected' : '' }}>
+                    <option value="{{ $cliente->id }}" {{ old('clientes_id') == $cliente->id ? 'selected' : '' }}>
                         {{ $cliente->nombre }}</option>
                 @endforeach
             </select>
@@ -102,16 +102,16 @@
 
         <div class="col-md-4">
             <label for="validationCustom04" class="form-label">Operario encargado</label>
-            <select class="form-select" name="operario">
+            <select class="form-select" name="empleados_id">
                 @foreach ($empleados as $empleado)
                     @if ($empleado->es_admin == 0)
-                        <option value="{{ $empleado->nif }}" {{ old('operario') == $empleado->nif ? 'selected' : '' }}>
+                        <option value="{{ $empleado->id }}" {{ old('empleados_id') == $empleado->id ? 'selected' : '' }}>
                             {{ $empleado->nombre }}
                         </option>
                     @endif
                 @endforeach
             </select>
-            {!! $errors->first('operario', '<span style=color:red>:message</span>') !!}
+            {!! $errors->first('empleados_id', '<span style=color:red>:message</span>') !!}
         </div>
 
         <div class="col-md-4">

@@ -33,7 +33,7 @@
                 <tbody>
 
                         <tr>
-                            <td>{{ $tarea->cliente }}</td>
+                            <td>{{ $tarea->cliente->nombre }}</td>
                             <td>{{ $tarea->nombre }}</td>
                             <td>{{ $tarea->telefono }}</td>
                             <td>{{ $tarea->descripcion }}</td>
@@ -41,7 +41,7 @@
                             <td>{{ $tarea->poblacion }}</td>
                             <td>{{ $tarea->codigoPostal }}</td>
                             <td>{{ $tarea->provincia }}</td>
-                            <td>{{ $tarea->operario }}</td>
+                            <td>{{ $tarea->empleado->nombre }}</td>
                             <td>{{ date("d-m-Y", strtotime($tarea->fechaRealizacion)) }}</td>
                         </tr>
                 </tbody>

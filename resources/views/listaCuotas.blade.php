@@ -35,6 +35,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Concepto</th>
                         <th scope="col">Fecha Emisión</th>
                         <th scope="col">Importe</th>
@@ -48,14 +49,28 @@
                     @foreach ($cuotas as $cuota)
                         <tr>
                             <td>{{ $cuota->id }}</td>
+                            {{-- <td>{{ $cuota->cliente->cif }}</td> --}}
+                            <td>
+                                @if (!is_null($cuota->cliente) && !is_null($cuota->cliente->deleted_at))
+                                    Cliente dado de baja
+                                @elseif (!is_null($cuota->cliente))
+                                    {{ $cuota->cliente->cif }}
+                                @else
+                                    Cliente no encontrado
+                                @endif
+                            </td>
+                            
+                            
+                            
                             <td>{{ $cuota->concepto }}</td>
                             <td>{{ $cuota->fechaEmision }}</td>
                             <td>{{ $cuota->importe }}€</td>
                             <td>{{ $cuota->pagada }}</td>
                             <td>{{ $cuota->fechaPago }}</td>
                             <td>{{ $cuota->notas }}</td>
-                            <td><a class="btn btn-danger" href="{{ route('confirmacionBorrarCliente', $cuota) }}">🗑️</a>
+                            <td><a class="btn btn-danger" href="{{ route('confirmacionBorrarCuota', $cuota) }}">🗑️</a>
                                 <a class="btn btn-warning" href="#">✏️</a></td>
+                            </tr>
                     @endforeach
                 </tbody>
             </table>

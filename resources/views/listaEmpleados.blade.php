@@ -62,7 +62,7 @@
                             @endif
                             <td><a class="btn btn-danger"
                                     href="{{ route('confirmacionBorrarEmpleado', $empleado) }}">🗑️</a>
-                                <a class="btn btn-warning" href="#">✏️</a>
+                                <a class="btn btn-warning" href="{{ route('formEmpleadoEdit', $empleado->id) }}">✏️</a>
                     @endforeach
                 </tbody>
             </table>

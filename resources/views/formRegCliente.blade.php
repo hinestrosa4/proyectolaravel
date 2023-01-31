@@ -55,11 +55,11 @@
 
         <div class="col-md-4">
             <label for="validationCustom03" class="form-label">País</label>
-            <select class="form-select" aria-label="Default select example" name="pais">
+            <select class="form-select" aria-label="Default select example" name="paises_id">
                 @foreach ($paises as $pais)
-                    <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
+                  <option value="{{ $pais->id }}" {{ old('paises_id') == $pais->id ? 'selected' : '' }}>{{ $pais->nombre }}</option>
                 @endforeach
-            </select>
+              </select>
         </div>
 
         <div class="col-md-4">
@@ -67,15 +67,15 @@
             <select class="form-select" name="moneda">
                 <?php $monedasMostradas = []; ?>
                 @foreach ($paises as $pais)
-                    @if ($pais->nombre_moneda == null)
-                    @else
-                        @if (!in_array($pais->nombre_moneda, $monedasMostradas))
-                            <?php array_push($monedasMostradas, $pais->nombre_moneda); ?>
-                            <option value="{{ $pais->nombre_moneda }}">{{ $pais->nombre_moneda }}</option>
-                        @endif
+                  @if ($pais->nombre_moneda == null)
+                  @else
+                    @if (!in_array($pais->nombre_moneda, $monedasMostradas))
+                      <?php array_push($monedasMostradas, $pais->nombre_moneda); ?>
+                      <option value="{{ $pais->nombre_moneda }}" {{ old('moneda') == $pais->nombre_moneda ? 'selected' : '' }}>{{ $pais->nombre_moneda }}</option>
                     @endif
+                  @endif
                 @endforeach
-            </select>
+              </select>
         </div>
 
         <div class="col-md-4">

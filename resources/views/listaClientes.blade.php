@@ -41,7 +41,7 @@
                         <th scope="col">Correo</th>
                         <th scope="col">IBAN</th>
                         <th scope="col">Cuota</th>
-                        {{-- <th scope="col">Pais</th> --}}
+                        <th scope="col">Pais</th>
                         <th scope="col">Moneda</th>
                         <th scope="col">Opciones</th>
                     </tr>
@@ -56,11 +56,10 @@
                             <td>{{ $cliente->correo }}</td>
                             <td>{{ $cliente->iban }}</td>
                             <td>{{ $cliente->cuota }}€</td>
-                            {{-- <td>{{ $cliente->pais }}</td> --}}
+                            <td>{{ $cliente->paises->nombre }}</td>
                             <td>{{ $cliente->moneda }}</td>
                             <td><a class="btn btn-danger"
                                 href="{{ route('confirmacionBorrarCliente', $cliente) }}">🗑️</a>
-                                    <a class="btn btn-warning" href="#">✏️</a>
                     @endforeach
                 </tbody>
             </table>

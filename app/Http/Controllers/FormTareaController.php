@@ -58,7 +58,7 @@ class FormTareaController extends Controller
     public function update(Tarea $tarea)
     {
         $datos = request()->validate([
-            'cliente' => 'required',
+            'clientes_id' => 'required',
             'nombre' => 'required|min:3',
             'descripcion' => 'required|min:5',
             'direccion' => 'required|min:5',
@@ -66,7 +66,7 @@ class FormTareaController extends Controller
             'codigoPostal' => 'required|regex:/^\d{5}(-\d{4})?$/',
             'provincia' => 'required',
             'estado' => 'required',
-            'operario' => 'required',
+            'empleados_id' => 'required',
             'fechaRealizacion' => 'required|after:now',
             'correo' => 'required|email',
             'anotacionesAnt' => '',

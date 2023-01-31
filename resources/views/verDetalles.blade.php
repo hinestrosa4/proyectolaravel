@@ -45,7 +45,7 @@
                     </tr>
                     <tr>
                         <td class="bold">Cliente:</td>
-                        <td>{{ $tarea->cliente }}</td>
+                        <td>{{ $tarea->cliente->cif }}</td>
                     </tr>
                     <tr>
                         <td class="bold">Nombre:</td>
@@ -73,7 +73,7 @@
                     </tr>
                     <tr>
                         <td class="bold">Operario Encargado:</td>
-                        <td>{{ $tarea->operario }}</td>
+                        <td>{{ $tarea->empleado->nombre }}</td>
                     </tr>
                     <tr>
                         <td class="bold">Fecha de realización:</td>

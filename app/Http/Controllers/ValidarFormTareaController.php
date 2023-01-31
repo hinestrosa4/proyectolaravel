@@ -16,7 +16,7 @@ class ValidarFormTareaController extends Controller
     public function store(Request $request)
     {
         $datos = request()->validate([
-            'cliente' => 'required',
+            'clientes_id' => 'required',
             'nombre' => 'required|min:3',
             'descripcion' => 'required|min:5',
             'direccion' => 'required|min:5',
@@ -24,7 +24,7 @@ class ValidarFormTareaController extends Controller
             'codigoPostal' => 'required|regex:/^\d{5}(-\d{4})?$/',
             'provincia' => 'required',
             'estado' => 'required',
-            'operario' => 'required',
+            'empleados_id' => 'required',
             'fechaRealizacion' => 'required|after:now',
             'correo' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',

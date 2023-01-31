@@ -53,19 +53,27 @@
                     @foreach ($tareas as $tarea)
                         <tr>
                             <td>{{ $tarea->id }}</td>
-                            <td>{{ $tarea->cliente }}</td>
+                            {{-- <td>{{ $tarea->cliente->nombre }}</td> --}}
+                            <td>
+                                @if ($tarea->cliente)
+                                    {{ $tarea->cliente->cif }}
+                                @else
+                                    Cliente dado de baja
+                                @endif
+                            </td>
                             <td>{{ $tarea->nombre }}</td>
                             <td>{{ $tarea->telefono }}</td>
                             <td>{{ $tarea->descripcion }}</td>
                             <td>{{ $tarea->poblacion }}</td>
                             <td>{{ $tarea->codigoPostal }}</td>
-                            <td>{{ $tarea->operario }}</td>
+                            <td>{{ $tarea->empleado->nombre }}</td>
                             <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
-                            <td><a class="btn btn-danger"
-                                href="{{ route('confirmacionBorrar', $tarea) }}">🗑️</a>
-                                
-                                    <a href="{{ route('formTareaEdit', $tarea) }}" class="btn btn-warning">✏️</a>
-                                    <a href="{{ route('verDetalles', $tarea)}}" class="btn btn-primary">👁️‍🗨️</a></td></tr>
+                            <td><a class="btn btn-danger" href="{{ route('confirmacionBorrar', $tarea) }}">🗑️</a>
+
+                                <a href="{{ route('formTareaEdit', $tarea) }}" class="btn btn-warning">✏️</a>
+                                <a href="{{ route('verDetalles', $tarea) }}" class="btn btn-primary">👁️‍🗨️</a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

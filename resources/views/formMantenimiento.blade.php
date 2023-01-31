@@ -19,7 +19,7 @@
         @endif
 
         <div class="col-md-4">
-            <label for="validationCustom04" class="form-label">Tarea</label>
+            <label for="validationCustom04" class="form-label">Cliente</label>
             <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
                     <option value="{{ $cliente->id }}" {{ old('clientes_id') == $cliente->id ? 'selected' : '' }}>
