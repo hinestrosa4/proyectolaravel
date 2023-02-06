@@ -45,7 +45,19 @@
                     </tr>
                     <tr>
                         <td class="bold">Cliente:</td>
-                        <td>{{ $tarea->cliente->cif }}</td>
+                        {{-- <td>{{ $tarea->cliente->cif }}</td> --}}
+                        <td>
+                            @if (!is_null($tarea->cliente))
+                                @if (!is_null($tarea->cliente->deleted_at))
+                                    Empleado dado de baja
+                                @else
+                                    {{ $tarea->cliente->cif }}
+                                @endif
+                            @else
+                                Empleado no encontrado
+                            @endif
+                        </td>
+                        
                     </tr>
                     <tr>
                         <td class="bold">Nombre:</td>
@@ -109,8 +121,13 @@
                     </tr>
                     <tr>
                         <td class="bold">Fichero Resumen:</td>
-                        <td>{{ $tarea->ficheroResumen }}</td>
+                        <td>
+                            @if ($tarea->ficheroResumen)
+                                <a class="btn btn-info" href="{{ Storage::url('public/files/'.$tarea->ficheroResumen) }}" download="{{ basename($tarea->ficheroResumen) }}">Descargar</a>
+                            @endif
+                        </td>
                     </tr>
+                    
                 </tbody>
             </table>
         </div>

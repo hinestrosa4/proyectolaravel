@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    @yield('elshisha')
     <title>@yield('title')</title>
 </head>
 <style>
@@ -52,7 +53,9 @@
                             <a class="dropdown-item text-white {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
                                 href="{{ route('formRegEmpleado') }}">Empleado</a>
                             <a class="dropdown-item text-white {{ request()->routeIs('formMantenimiento') ? 'active' : '' }}"
-                                href="{{ route('formMantenimiento') }}">Cuota</a>
+                                href="{{ route('formMantenimiento') }}">Remesa Mensual</a>
+                            <a class="dropdown-item text-white {{ request()->routeIs('formCuotaExcep') ? 'active' : '' }}"
+                                href="{{ route('formCuotaExcep') }}">Cuota Excepcional</a>
 
                         </div>
                     </li>
@@ -70,7 +73,7 @@
                             <a class="dropdown-item text-white {{ request()->routeIs('listaEmpleados') ? 'active' : '' }} text-dark"
                                 href="{{ route('listaEmpleados') }}">Empleados</a>
                             <a class="dropdown-item text-white {{ request()->routeIs('listaCuotas') ? 'active' : '' }} text-dark"
-                                href="{{ route('listaCuotas') }}">Cuotas</a>
+                                href="{{ route('listaCuotas', 'fechaEmision') }}">Cuotas</a>
                         </div>
                     </li>
                 </ul>

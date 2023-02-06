@@ -71,18 +71,43 @@ class FormTareaController extends Controller
             'correo' => 'required|email',
             'anotacionesAnt' => '',
             'anotacionesPos' => '',
-            // 'ficheroResumen' => 'required|file',
+            'ficheroResumen' => 'required|file',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
         ]);
 
-        // $tarea->file('file');
-        // $path = $tarea->store('App\Http\recourses\files');
-        // $path = $tarea->storeAs('archivos', 'mi_archivo.jpg');
+        $ficheroResumen = request()->file('ficheroResumen');
+        $nombre_original = $ficheroResumen->getClientOriginalName();
+        $path = $ficheroResumen->storeAs('public/files', $nombre_original);
 
-
+        $datos['ficheroResumen'] = $nombre_original;
 
         $tarea->update($datos);
         session()->flash('message', 'La tarea ha sido actualizada correctamente.');
+        return redirect()->route('listaTareas');
+    }
+
+    public function completar(Tarea $tarea)
+    {
+        return view('formTareaCompletar', compact('tarea'));
+    }
+
+    public function updateCompletar(Tarea $tarea)
+    {
+        $datos = request()->validate([
+            'estado' => 'required',
+            'anotacionesAnt' => '',
+            'anotacionesPos' => '',
+            'ficheroResumen' => 'required|file',
+        ]);
+
+        $ficheroResumen = request()->file('ficheroResumen');
+        $nombre_original = $ficheroResumen->getClientOriginalName();
+        $path = $ficheroResumen->storeAs('public/files', $nombre_original);
+
+        $datos['ficheroResumen'] = $nombre_original;
+
+        $tarea->update($datos);
+        session()->flash('message', 'La tarea ha sido completada correctamente.');
         return redirect()->route('listaTareas');
     }
 }

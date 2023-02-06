@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tarea;
 use App\Models\Cliente;
 use App\Models\Cuota;
 use Illuminate\Http\Request;
@@ -20,10 +21,30 @@ class FormMantenimientoController extends Controller
         return view('formMantenimiento', compact('clientes'));
     }
 
-    public function listar()
+    // public function listar()
+    // {
+    //     $cuotas = Cuota::orderBy('id', 'asc')->paginate(10);
+    //     return view('listaCuotas', compact('cuotas'));
+    // }
+
+    public function listar($filtro = "")
     {
-        $cuotas = Cuota::orderBy('id', 'asc')->paginate(10);
-        return view('listaCuotas', compact('cuotas'));
+        $tareas = Tarea::all();
+        switch ($filtro) {
+            case "NO":
+                $cuotas = Cuota::where('pagada', 'NO')->orderBy('fechaEmision', 'asc')->paginate(10);
+                break;
+            case "SI":
+                $cuotas = Cuota::where('pagada', 'SI')->orderBy('fechaEmision', 'asc')->paginate(10);
+                break;
+            case "fechaPago":
+                $cuotas = Cuota::orderBy('fechaPago', 'desc')->paginate(10);
+                break;
+            default:
+                $cuotas = Cuota::orderBy('fechaEmision', 'desc')->paginate(10);
+                break;
+        }
+        return view('listaCuotas', compact('cuotas', 'tareas'));
     }
 
     public function confirmarBorrar(Cuota $cuota)
@@ -35,7 +56,7 @@ class FormMantenimientoController extends Controller
     {
         $cuota->delete();
         session()->flash('message', 'La cuota ha sido borrada correctamente.');
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas','fechaEmision');
     }
 
     public function edit($id)
@@ -59,6 +80,6 @@ class FormMantenimientoController extends Controller
 
     $cuota->update($datos);
     session()->flash('message', 'La cuota ha sido actualizada correctamente.');
-    return redirect()->route('listaCuotas');
+    return redirect()->route('listaCuotas','fechaEmision');
 }
 }

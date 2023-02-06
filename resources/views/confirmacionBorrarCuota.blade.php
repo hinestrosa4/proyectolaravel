@@ -60,7 +60,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Borrar</button>
-                    <a class="btn btn-primary" href="{{ route('listaCuotas') }}">Volver</a>
+                    <a class="btn btn-primary" href="{{ route('listaCuotas','fechaEmision') }}">Volver</a>
                 </form>
             </div>
         </div>

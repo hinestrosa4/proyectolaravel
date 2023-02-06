@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use App\Http\Rules\Validaciones;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ValidarFormRegEmpleadoController extends Controller
 {
@@ -24,6 +25,8 @@ class ValidarFormRegEmpleadoController extends Controller
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'es_admin' => 'required',
         ]);
+
+        // $datos['clave'] = Hash::make($datos['clave']);
 
         Empleado::create($datos);
         session()->flash('message', 'El empleado ha sido registrado correctamente');

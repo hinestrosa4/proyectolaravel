@@ -6,25 +6,28 @@ use App\Models\Cliente;
 use App\Models\Cuota;
 use Illuminate\Http\Request;
 
-class ValidarFormMantenimientoController extends Controller
+class ValidarFormCuotaExcep extends Controller
 {
+    public function formularioCuota(Request $request)
+    {
+        $clientes = Cliente::all();
+        return view('formCuotaExcep', compact('clientes'));
+    }
+
     public function store()
     {
         $data = request()->validate([
+            'clientes_id' => 'required',
             'concepto' => 'required',
+            'importe' => 'required',
             'fechaEmision' => 'required|after:now',
             'notas' => 'required',
         ]);
 
-        $clientes = Cliente::all();
-
-        foreach ($clientes as $cliente) {
-            $data['clientes_id'] = $cliente->id;
-            $data['importe'] = $cliente->cuota;
-            Cuota::create($data);
-        }
+        Cuota::create($data);
 
         session()->flash('message', 'La cuota ha sido creada correctamente.');
-        return redirect()->route('formMantenimiento');
+
+        return redirect()->route('formCuotaExcep');
     }
 }

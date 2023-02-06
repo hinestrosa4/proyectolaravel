@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Rules\Validaciones;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class FormEmpleadosController extends Controller
 {
@@ -59,6 +60,8 @@ class FormEmpleadosController extends Controller
         'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
         'es_admin' => 'required',
     ]);
+
+    // $datos['clave'] = Hash::make($datos['clave']);
 
     $empleado->update($datos);
     session()->flash('message', 'El empleado ha sido actualizada correctamente.');

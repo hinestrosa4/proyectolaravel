@@ -28,6 +28,7 @@
             @endforeach
             </select>
         </div>
+
         <div class="col-md-4">
             <label for="nombre">Nombre Completo</label>
             <input type="text" name="nombre" class="form-control" id="nombre"
@@ -36,6 +37,7 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
+
         <div class="col-md-4">
             <label for="telefono">Teléfono</label>
             <input type="text" name="telefono" class="form-control" id="telefono"
@@ -44,6 +46,7 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
+
         <div class="col-md-4">
             <label for="correo">Correo electrónico</label>
             <input type="text" name="correo" class="form-control" id="correo"
@@ -52,6 +55,7 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
+
         <div class="col-md-4">
             <label for="descripcion">Descripción</label>
             <textarea class="form-control" name="descripcion" id="descripcion">{{ old('descripcion', $tarea->descripcion) }}</textarea>
@@ -157,7 +161,7 @@
             <label for="floatingTextarea2">Anotaciones Anteriores</label>
             <div class="form-floating">
                 <textarea class="form-control" name="anotacionesAnt" placeholder="Deja las anotaciones anteriores aquí"
-                    id="floatingTextarea2">{{ old('anotacionesAnt') }}</textarea>
+                    id="floatingTextarea2">{{ old('anotacionesAnt') ?? $tarea->anotacionesAnt }}</textarea>
                 @error('anotacionesAnt')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -168,7 +172,7 @@
             <label for="floatingTextarea2">Anotaciones Posteriores</label>
             <div class="form-floating">
                 <textarea class="form-control" name="anotacionesPos" placeholder="Deja las anotaciones posteriores aquí"
-                    id="floatingTextarea2">{{ old('anotacionesPos') }}</textarea>
+                    id="floatingTextarea2">{{ old('anotacionesPos') ?? $tarea->anotacionesPos }}</textarea>
                 @error('anotacionesPos')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -185,6 +189,7 @@
         </div>
 
         <div class="col-12">
+            <a href="{{ route('listaTareas') }}" class="btn btn-secondary" id="cancel-btn">Cancelar</a>
             <button type="submit" class="btn btn-primary">Actualizar Tarea</button>
         </div>
     </form>

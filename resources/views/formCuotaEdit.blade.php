@@ -80,7 +80,7 @@
 
         <div class="col-12">
             <button class="btn btn-success" type="submit">Almacenar cuota</button>
-            <a href="{{ route('listaCuotas') }}" class="btn btn-primary" id="cancel-btn">Atras</a>
+            <a href="{{ route('listaCuotas','fechaEmision') }}" class="btn btn-primary" id="cancel-btn">Atras</a>
         </div>
     </form>
     </div>
