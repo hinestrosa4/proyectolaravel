@@ -123,11 +123,10 @@
                         <td class="bold">Fichero Resumen:</td>
                         <td>
                             @if ($tarea->ficheroResumen)
-                                <a class="btn btn-info" href="{{ Storage::url('public/files/'.$tarea->ficheroResumen) }}" download="{{ basename($tarea->ficheroResumen) }}">Descargar</a>
+                                <a class="btn btn-info" href="{{ Storage::url('public/files/'.$tarea->ficheroResumen) }}"download="{{ basename($tarea->ficheroResumen) }}">Descargar</a>
                             @endif
                         </td>
                     </tr>
-                    
                 </tbody>
             </table>
         </div>

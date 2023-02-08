@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'empleado' => [
+        'web' => [
             'driver' => 'session',
-            'provider' => 'empleados',
+            'provider' => 'users',
         ],
     ],
 
@@ -60,7 +60,7 @@ return [
     */
 
     'providers' => [
-        'empleados' => [
+        'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\Empleado::class,
         ],

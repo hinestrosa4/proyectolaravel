@@ -19,14 +19,14 @@ class ValidarFormRegEmpleadoController extends Controller
                 }
             }],
             'nombre' => 'required|min:3',
-            'clave' => 'required|min:5',
+            'password' => 'required|min:5',
             'fecha_alta' => 'required',
-            'correo' => 'required|email',
+            'email' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'es_admin' => 'required',
         ]);
 
-        // $datos['clave'] = Hash::make($datos['clave']);
+        $datos['password'] = Hash::make($datos['password']);
 
         Empleado::create($datos);
         session()->flash('message', 'El empleado ha sido registrado correctamente');

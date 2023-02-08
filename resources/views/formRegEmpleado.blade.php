@@ -31,8 +31,8 @@
 
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">Contraseña</label>
-            <input type="password" name="clave" class="form-control" id="clave" value="{{ old('clave') }}">
-            {!! $errors->first('clave', '<span style=color:red>:message</span>') !!}
+            <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}">
+            {!! $errors->first('password', '<span style=color:red>:message</span>') !!}
         </div>
 
         <div class="col-md-4">
@@ -45,10 +45,10 @@
             <label for="validationCustomUsername" class="form-label">Correo electrónico</label>
             <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input type="text" name="correo" class="form-control" id="correo" value="{{ old('correo') }}"
+                <input type="text" name="email" class="form-control" id="email" value="{{ old('email') }}"
                     placeholder="Correo" aria-describedby="inputGroupPrepend">
             </div>
-            {!! $errors->first('correo', '<span style=color:red>:message</span>') !!}
+            {!! $errors->first('email', '<span style=color:red>:message</span>') !!}
         </div>
 
         <div class="col-md-4">

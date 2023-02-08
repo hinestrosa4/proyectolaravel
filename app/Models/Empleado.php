@@ -12,5 +12,5 @@ class Empleado extends Authenticatable
     use SoftDeletes;
     protected $table = "empleados";
     public $timestamps = false;
-    protected $fillable = ['nif', 'nombre', 'clave', 'fecha_alta', 'correo', 'telefono', 'es_admin'];
+    protected $fillable = ['nif', 'nombre', 'password', 'fecha_alta', 'email', 'telefono', 'es_admin'];
 }

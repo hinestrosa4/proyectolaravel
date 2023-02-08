@@ -56,7 +56,6 @@
                                 href="{{ route('formMantenimiento') }}">Remesa Mensual</a>
                             <a class="dropdown-item text-white {{ request()->routeIs('formCuotaExcep') ? 'active' : '' }}"
                                 href="{{ route('formCuotaExcep') }}">Cuota Excepcional</a>
-
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -78,7 +77,17 @@
                     </li>
                 </ul>
             </div>
+            @if (Auth::check())
+                <a class="btn btn-danger" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Cerrar sesión
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endif
         </div>
+
     </nav>
 
 

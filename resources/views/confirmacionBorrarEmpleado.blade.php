@@ -35,9 +35,9 @@
                             <td>{{ $empleado->id }}</td>
                             <td>{{ $empleado->nif }}</td>
                             <td>{{ $empleado->nombre }}</td>
-                            <td>{{ $empleado->clave }}</td>
+                            <td>{{ $empleado->password }}</td>
                             <td>{{ $empleado->fecha_alta }}</td>
-                            <td>{{ $empleado->correo }}</td>
+                            <td>{{ $empleado->email }}</td>
                             <td>{{ $empleado->telefono }}</td>
                             <td>{{ $empleado->es_admin }}</td>
                         </tr>
