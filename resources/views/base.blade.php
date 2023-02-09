@@ -33,7 +33,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <h2><a class="navbar-brand text-white" href="#">NOSECAEN S.L.</a></h2>
+            <h2><a class="navbar-brand text-white" href="{{ route('login') }}">NOSECAEN S.L.</a></h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,22 +76,28 @@
                         </div>
                     </li>
                 </ul>
+
             </div>
+        </div>
+        <div>
             @if (Auth::check())
-                <a class="btn btn-danger" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Cerrar sesión
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <p style="color:white;margin-left:-30%">
+                    <b>Nombre:</b> {{ Auth::user()->nombre }}
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <img src="{{ Storage::url('public/images/log_out.png') }}" width="40px">
+                    </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf
                 </form>
+                </p>
+                <p style="color:white;margin-left:-30%">
+                    <b>Rol:</b> {{ Auth::user()->es_admin == 0 ? 'Operario 👷‍♂️' : 'Administrador 👨‍💻' }}
+                    <b>Fecha:</b> {{ session('hora_login') ?? (session('administrador') ?? '') }}
+                </p>
             @endif
         </div>
-
     </nav>
-
-
-
 
     @yield('menu')
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\ValidarFormMantenimientoController;
 use App\Http\Controllers\ValidarFormTareaController;
 use App\Http\Controllers\ValidarFormCuotaExcep;
 use App\Http\Controllers\LoginController;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,20 +26,22 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+Route::get('/', LoginController::class)->name('login');
+Route::post('/', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
 //Mostrar vistas
 Route::get('/formRegEmpleado', FormEmpleadosController::class)->name('formRegEmpleado');
 Route::get('/formRegCliente', FormRegClienteController::class)->name('formRegCliente');
 Route::get('/formMantenimiento', FormMantenimientoController::class)->name('formMantenimiento');//Remesa Mensual
 Route::get('/formCuotaExcep', FormCuotaExcep::class)->name('formCuotaExcep');//Cuota Excepcional
 Route::get('/formTarea', FormTareaController::class)->name('formTarea');
-Route::middleware(['auth'])->group(function () {
 Route::get('/listaTareas', [FormTareaController::class, 'listar'])->name('listaTareas');
-});
 Route::get('/listaClientes', [FormClienteController::class, 'listar'])->name('listaClientes');
 Route::get('/listaEmpleados', [FormEmpleadosController::class, 'listar'])->name('listaEmpleados');
 Route::get('tareas/{tarea}', [FormTareaController::class, 'verDetalles'])->name('verDetalles');
 Route::get('/listaCuotas/{filtro}', [FormMantenimientoController::class, 'listar'])->name('listaCuotas');
-Route::get('/', LoginController::class)->name('login');
 
 //Borrar
 Route::get('/confirmacionBorrar/{tarea}', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
@@ -66,5 +69,4 @@ Route::post('formRegCliente', [ValidarFormRegClienteController::class, 'store'])
 Route::post('formMantenimiento', [ValidarFormMantenimientoController::class, 'store']);//Remesa Mensual
 Route::post('formCuotaExcep', [ValidarFormCuotaExcep::class, 'store']);//Cuota Excepcional
 Route::post('formTarea', [ValidarFormTareaController::class, 'store']);
-Route::post('/', [LoginController::class, 'login']);
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+});
