@@ -46,16 +46,19 @@
                             Añadir
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="addDropdown">
-                            <a class="dropdown-item text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-dark"
-                                href="{{ route('formTarea') }}">Tarea</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
-                                href="{{ route('formRegCliente') }}">Cliente</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
-                                href="{{ route('formRegEmpleado') }}">Empleado</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('formMantenimiento') ? 'active' : '' }}"
-                                href="{{ route('formMantenimiento') }}">Remesa Mensual</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('formCuotaExcep') ? 'active' : '' }}"
-                                href="{{ route('formCuotaExcep') }}">Cuota Excepcional</a>
+                            @if (Auth::check() && Auth::user()->es_admin === 1)
+                                <a class="dropdown-item text-white {{ request()->routeIs('formTarea') ? 'active' : '' }} text-dark"
+                                    href="{{ route('formTarea') }}">Tarea</a>
+
+                                <a class="dropdown-item text-white {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
+                                    href="{{ route('formRegCliente') }}">Cliente</a>
+                                <a class="dropdown-item text-white {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
+                                    href="{{ route('formRegEmpleado') }}">Empleado</a>
+                                <a class="dropdown-item text-white {{ request()->routeIs('formMantenimiento') ? 'active' : '' }}"
+                                    href="{{ route('formMantenimiento') }}">Remesa Mensual</a>
+                                <a class="dropdown-item text-white {{ request()->routeIs('formCuotaExcep') ? 'active' : '' }}"
+                                    href="{{ route('formCuotaExcep') }}">Cuota Excepcional</a>
+                            @endif
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -65,14 +68,17 @@
                             Listar
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="listDropdown">
+
                             <a class="dropdown-item text-white {{ request()->routeIs('listaTareas') ? 'active' : '' }} text-dark"
-                                href="{{ route('listaTareas') }}">Tareas</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('listaClientes') ? 'active' : '' }} text-dark"
-                                href="{{ route('listaClientes') }}">Clientes</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('listaEmpleados') ? 'active' : '' }} text-dark"
-                                href="{{ route('listaEmpleados') }}">Empleados</a>
-                            <a class="dropdown-item text-white {{ request()->routeIs('listaCuotas') ? 'active' : '' }} text-dark"
-                                href="{{ route('listaCuotas', 'fechaEmision') }}">Cuotas</a>
+                                href="{{ Auth::check() && Auth::user()->es_admin === 1 ? route('listaTareas') : route('listaTareasOperario') }}">Tareas</a>
+                            @if (Auth::check() && Auth::user()->es_admin === 1)
+                                <a class="dropdown-item text-white {{ request()->routeIs('listaClientes') ? 'active' : '' }} text-dark"
+                                    href="{{ route('listaClientes') }}">Clientes</a>
+                                <a class="dropdown-item text-white {{ request()->routeIs('listaEmpleados') ? 'active' : '' }} text-dark"
+                                    href="{{ route('listaEmpleados') }}">Empleados</a>
+                                <a class="dropdown-item text-white {{ request()->routeIs('listaCuotas') ? 'active' : '' }} text-dark"
+                                    href="{{ route('listaCuotas', 'fechaEmision') }}">Cuotas</a>
+                            @endif
                         </div>
                     </li>
                 </ul>
@@ -93,7 +99,7 @@
                 </p>
                 <p style="color:white;margin-left:-30%">
                     <b>Rol:</b> {{ Auth::user()->es_admin == 0 ? 'Operario 👷‍♂️' : 'Administrador 👨‍💻' }}
-                    <b>Fecha:</b> {{ session('hora_login') ?? (session('administrador') ?? '') }}
+                    | <b>Fecha:</b> {{ session('hora_login') ?? (session('administrador') ?? '') }}
                 </p>
             @endif
         </div>

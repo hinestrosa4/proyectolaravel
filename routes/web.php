@@ -13,6 +13,7 @@ use App\Http\Controllers\ValidarFormMantenimientoController;
 use App\Http\Controllers\ValidarFormTareaController;
 use App\Http\Controllers\ValidarFormCuotaExcep;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\FacturaController;
 use Spatie\Permission\Models\Role;
 
 /*
@@ -30,43 +31,95 @@ Route::get('/', LoginController::class)->name('login');
 Route::post('/', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+//Correo
+Route::get('/enviarCorreo', [FacturaController::class, 'enviarCorreo']);
+
+
+// Route::middleware(['administrador'])->group(function () {
+
+// });
+
 Route::middleware(['auth'])->group(function () {
-//Mostrar vistas
-Route::get('/formRegEmpleado', FormEmpleadosController::class)->name('formRegEmpleado');
-Route::get('/formRegCliente', FormRegClienteController::class)->name('formRegCliente');
-Route::get('/formMantenimiento', FormMantenimientoController::class)->name('formMantenimiento');//Remesa Mensual
-Route::get('/formCuotaExcep', FormCuotaExcep::class)->name('formCuotaExcep');//Cuota Excepcional
-Route::get('/formTarea', FormTareaController::class)->name('formTarea');
-Route::get('/listaTareas', [FormTareaController::class, 'listar'])->name('listaTareas');
-Route::get('/listaClientes', [FormClienteController::class, 'listar'])->name('listaClientes');
-Route::get('/listaEmpleados', [FormEmpleadosController::class, 'listar'])->name('listaEmpleados');
-Route::get('tareas/{tarea}', [FormTareaController::class, 'verDetalles'])->name('verDetalles');
-Route::get('/listaCuotas/{filtro}', [FormMantenimientoController::class, 'listar'])->name('listaCuotas');
 
-//Borrar
-Route::get('/confirmacionBorrar/{tarea}', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
-Route::delete('/borrarTarea/{tarea}', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
-Route::get('/confirmacionBorrarEmpleado/{empleado}', [FormEmpleadosController::class, 'confirmarBorrar'])->name('confirmacionBorrarEmpleado');
-Route::delete('/borrarEmpleado/{empleado}', [FormEmpleadosController::class, 'borrarEmpleado'])->name('borrarEmpleado');
-Route::get('/confirmacionBorrarCliente/{cliente}', [FormClienteController::class, 'confirmarBorrar'])->name('confirmacionBorrarCliente');
-Route::delete('/borrarCliente/{cliente}', [FormClienteController::class, 'borrarCliente'])->name('borrarCliente');
-Route::get('/confirmacionBorrarCuota/{cuota}', [FormMantenimientoController::class, 'confirmarBorrar'])->name('confirmacionBorrarCuota');
-Route::delete('/borrarCuota/{cuota}', [FormMantenimientoController::class, 'borrarCuota'])->name('borrarCuota');
+    Route::middleware(['administrador'])->group(function () {
+        /*---------- EMPLEADO ----------*/
+        Route::get('/formRegEmpleado', FormEmpleadosController::class)->name('formRegEmpleado');
+        Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store']);
+        
+        /*----- Listar -----*/
+        Route::get('/listaEmpleados', [FormEmpleadosController::class, 'listar'])->name('listaEmpleados');
+        
+        /*----- Borrar -----*/
+        Route::get('/confirmacionBorrarEmpleado/{empleado}', [FormEmpleadosController::class, 'confirmarBorrar'])->name('confirmacionBorrarEmpleado');
+        Route::delete('/borrarEmpleado/{empleado}', [FormEmpleadosController::class, 'borrarEmpleado'])->name('borrarEmpleado');
+        
+        /*--- Modificar ---*/
+        Route::get('formEmpleadoEdit/{empleado}/editar', [FormEmpleadosController::class, 'edit'])->name('formEmpleadoEdit');
+        Route::put('/formEmpleadoUpdate/{empleado}', [FormEmpleadosController::class, 'update'])->name('formEmpleadoUpdate');
+    });
 
-//Editar
-Route::get('formTareaEdit/{tarea}/editar', [FormTareaController::class, 'edit'])->name('formTareaEdit');
-Route::put('/formTareaUpdate/{tarea}', [FormTareaController::class, 'update'])->name('formTareaUpdate');
-Route::get('formTareaCompletar/{tarea}/completar', [FormTareaController::class, 'completar'])->name('formTareaCompletar');
-Route::put('/formTareaUpdateCompletar/{tarea}', [FormTareaController::class, 'updateCompletar'])->name('formTareaUpdateCompletar');
-Route::get('formEmpleadoEdit/{empleado}/editar', [FormEmpleadosController::class, 'edit'])->name('formEmpleadoEdit');
-Route::put('/formEmpleadoUpdate/{empleado}', [FormEmpleadosController::class, 'update'])->name('formEmpleadoUpdate');
-Route::get('formCuotaEdit/{cuota}/editar', [FormMantenimientoController::class, 'edit'])->name('formCuotaEdit');
-Route::put('/formCuotaUpdate/{cuota}', [FormMantenimientoController::class, 'update'])->name('formCuotaUpdate');
+    Route::middleware(['administrador'])->group(function () {
+        /*---------- CLIENTE ----------*/
+        Route::get('/formRegCliente', FormRegClienteController::class)->name('formRegCliente');
+        Route::post('formRegCliente', [ValidarFormRegClienteController::class, 'store']);
 
-//Recoger datos formulario
-Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store']);
-Route::post('formRegCliente', [ValidarFormRegClienteController::class, 'store']);
-Route::post('formMantenimiento', [ValidarFormMantenimientoController::class, 'store']);//Remesa Mensual
-Route::post('formCuotaExcep', [ValidarFormCuotaExcep::class, 'store']);//Cuota Excepcional
-Route::post('formTarea', [ValidarFormTareaController::class, 'store']);
+        /*----- Listar -----*/
+        Route::get('/listaClientes', [FormClienteController::class, 'listar'])->name('listaClientes');
+        
+        /*----- Borrar -----*/
+        Route::get('/confirmacionBorrarCliente/{cliente}', [FormClienteController::class, 'confirmarBorrar'])->name('confirmacionBorrarCliente');
+        Route::delete('/borrarCliente/{cliente}', [FormClienteController::class, 'borrarCliente'])->name('borrarCliente');
+    });
+
+    Route::middleware(['administrador'])->group(function () {
+        /*---------- CUOTAS ----------*/
+        Route::get('/formMantenimiento', FormMantenimientoController::class)->name('formMantenimiento'); //Remesa Mensual
+        Route::get('/formCuotaExcep', FormCuotaExcep::class)->name('formCuotaExcep'); //Cuota Excepcional
+        Route::post('formMantenimiento', [ValidarFormMantenimientoController::class, 'store']); //Remesa Mensual
+        Route::post('formCuotaExcep', [ValidarFormCuotaExcep::class, 'store']); //Cuota Excepcional
+        
+        /*----- Listar -----*/
+        Route::get('/listaCuotas/{filtro}', [FormMantenimientoController::class, 'listar'])->name('listaCuotas');
+       
+        /*----- Borrar -----*/
+        Route::get('/confirmacionBorrarCuota/{cuota}', [FormMantenimientoController::class, 'confirmarBorrar'])->name('confirmacionBorrarCuota');
+        Route::delete('/borrarCuota/{cuota}', [FormMantenimientoController::class, 'borrarCuota'])->name('borrarCuota');
+        
+        /*--- Modificar ---*/
+        Route::get('formCuotaEdit/{cuota}/editar', [FormMantenimientoController::class, 'edit'])->name('formCuotaEdit');
+        Route::put('/formCuotaUpdate/{cuota}', [FormMantenimientoController::class, 'update'])->name('formCuotaUpdate');
+    });
+
+
+    /*---------- TAREA ----------*/
+    Route::middleware(['administrador'])->group(function () {
+        Route::get('/formTarea', FormTareaController::class)->name('formTarea');
+        Route::post('formTarea', [ValidarFormTareaController::class, 'store']);
+    });
+
+    /*----- Listar -----*/
+    Route::get('/listaTareas', [FormTareaController::class, 'listar'])->name('listaTareas');
+    Route::get('/listaTareasOperario', [FormTareaController::class, 'listarOperario'])->name('listaTareasOperario');
+    Route::get('tareas/{tarea}', [FormTareaController::class, 'verDetalles'])->name('verDetalles');
+
+    /*----- Borrar -----*/
+    Route::get('/confirmacionBorrar/{tarea}', [FormTareaController::class, 'confirmarBorrar'])->name('confirmacionBorrar');
+    Route::delete('/borrarTarea/{tarea}', [FormTareaController::class, 'borrarTarea'])->name('borrarTarea');
+
+    /*--- Modificar ---*/
+    Route::get('formTareaEdit/{tarea}/editar', [FormTareaController::class, 'edit'])->name('formTareaEdit');
+    Route::put('/formTareaUpdate/{tarea}', [FormTareaController::class, 'update'])->name('formTareaUpdate');
+
+    /*--- Completar ---*/
+    Route::middleware(['operario'])->group(function () {
+        Route::get('formTareaCompletar/{tarea}/completar', [FormTareaController::class, 'completar'])->middleware('VerificarEmpleadoTarea')->name('formTareaCompletar');
+        Route::put('/formTareaUpdateCompletar/{tarea}', [FormTareaController::class, 'updateCompletar'])->name('formTareaUpdateCompletar');
+    });
+
+    /*----- Listar de Operario -----*/
+    Route::middleware(['operario'])->group(function () {
+        //Ver detalles de una Tarea siendo operario
+        Route::get('/detallesTareaOperario/{tarea}', [FormTareaController::class, 'verDetalles'])->middleware('VerificarEmpleadoTarea')->name('detallesTareaOperario');
+    });
+    
 });

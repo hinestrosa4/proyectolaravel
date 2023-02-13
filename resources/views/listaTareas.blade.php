@@ -40,10 +40,11 @@
                         <th scope="col">ID</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Telefono</th>
+                        <th scope="col">Teléfono</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Población</th>
-                        <th scope="col">Codigo postal</th>
+                        {{-- <th scope="col">Codigo postal</th> --}}
+                        <th class="col">Estado</th>
                         <th scope="col">Operario Encargado</th>
                         <th scope="col">Fecha de realización</th>
                         <th scope="col">Opciones</th>
@@ -66,7 +67,16 @@
                                 <td>{{ $tarea->telefono }}</td>
                                 <td>{{ $tarea->descripcion }}</td>
                                 <td>{{ $tarea->poblacion }}</td>
-                                <td>{{ $tarea->codigoPostal }}</td>
+                                {{-- <td>{{ $tarea->codigoPostal }}</td> --}}
+                                <td>
+                                    @if ($tarea->estado === 'P')
+                                        📝
+                                    @elseif ($tarea->estado === 'C')
+                                        ❌
+                                    @elseif ($tarea->estado === 'R')
+                                        ✅
+                                    @endif
+                                </td>
                                 <td>
                                     @if (!is_null($tarea->empleado) && !is_null($tarea->empleado->deleted_at))
                                         Empleado dado de baja
@@ -77,10 +87,16 @@
                                     @endif
                                 </td>
                                 <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
-                                <td><a class="btn btn-danger" href="{{ route('confirmacionBorrar', $tarea) }}">🗑️</a>
-                                    <a href="{{ route('formTareaEdit', $tarea) }}" class="btn btn-warning">✏️</a>
-                                    <a href="{{ route('formTareaCompletar', $tarea) }}" class="btn btn-success">✅</a>
-                                    <a href="{{ route('verDetalles', $tarea) }}" class="btn btn-primary">👁️‍🗨️</a>
+                                <td>
+                                    @if (Auth::check() && Auth::user()->es_admin === 1)
+                                        <a class="btn btn-danger" href="{{ route('confirmacionBorrar', $tarea) }}">🗑️</a>
+                                        <a href="{{ route('formTareaEdit', $tarea) }}" class="btn btn-warning">✏️</a>
+                                        <a href="{{ route('verDetalles', $tarea) }}" class="btn btn-primary">👁️‍🗨️</a>
+                                    @endif
+                                    @if (Auth::check() && Auth::user()->es_admin === 0)
+                                        <a href="{{ route('formTareaCompletar', $tarea) }}" class="btn btn-success">✅</a>
+                                        <a href="{{ route('detallesTareaOperario', $tarea) }}" class="btn btn-primary">👁️‍🗨️</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endif

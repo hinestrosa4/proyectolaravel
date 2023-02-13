@@ -22,7 +22,8 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
 
             $empleado = Empleado::where('email', $request->email)->first();
-            $time = date("h:i:s");
+            $time = date("H:i:s");
+            $time = date("H:i:s", strtotime($time . "+1 hour"));
 
             if ($empleado->es_admin === 1) {
                 session(['administrador' => $time]);

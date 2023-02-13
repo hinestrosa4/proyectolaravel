@@ -34,11 +34,11 @@
                                     <label class="form-label" for="typePasswordX-2">Clave</label>
                                 </div>
 
-                                <!-- Checkbox -->
+                                {{-- <!-- Checkbox -->
                                 <div class="form-check d-flex justify-content-start mb-4">
                                     <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
                                     <label class="form-check-label" for="form1Example3"> Remember password </label>
-                                </div>
+                                </div> --}}
 
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                                 <br><br>
@@ -55,7 +55,7 @@
                                 <hr class="my-4">
 
                                 <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
-                                    type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button><br><br>
+                                    type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
                                 <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
                                     type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</button>
                             </div>

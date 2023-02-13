@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-12">
-            <a href="{{ route('listaTareas') }}" class="btn btn-secondary" id="cancel-btn">Cancelar</a>
+            <a  href="{{ Auth::check() && Auth::user()->es_admin === 1 ? route('listaTareas') : route('listaTareasOperario') }}" class="btn btn-secondary" id="cancel-btn">Cancelar</a>
             <button type="submit" class="btn btn-primary">Completar Tarea</button>
         </div>
     </form>

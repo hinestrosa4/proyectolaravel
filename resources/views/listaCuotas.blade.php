@@ -55,18 +55,17 @@
                 </thead>
                 <tbody>
                     @foreach ($cuotas as $cuota)
-                        @if (!is_null($cuota->cliente) && is_null($cuota->cliente->deleted_at))
+                        {{-- @if (!is_null($cuota->cliente) && is_null($cuota->cliente->deleted_at)) --}}
                             <tr>
                                 <td>{{ $cuota->id }}</td>
                                 {{-- <td>{{ $cuota->cliente->cif }}</td> --}}
                                 <td>
-                                    @if (!is_null($cuota->cliente) && !is_null($cuota->cliente->deleted_at))
-                                        Cliente dado de baja
-                                    @elseif (!is_null($cuota->cliente))
-                                        {{ $cuota->cliente->cif }}
-                                    @else
-                                        Cliente no encontrado
-                                    @endif
+                                    @if (!is_null($cuota->cliente) && !is_null($cuota->cliente))
+                                    {{ $cuota->cliente->cif }}
+                                @else
+                                    Cliente no encontrado
+                                @endif
+                                
                                 </td>
                                 <td>{{ $cuota->concepto }}</td>
                                 <td>{{ date('d-m-Y', strtotime($cuota->fechaEmision)) }}</td>
@@ -83,7 +82,7 @@
                                     <a class="btn btn-warning" href="{{ route('formCuotaEdit', $cuota->id) }}">✏️</a>
                                 </td>
                             </tr>
-                        @endif
+                        {{-- @endif --}}
                     @endforeach
                 </tbody>
             </table>

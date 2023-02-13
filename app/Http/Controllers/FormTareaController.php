@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Provincia;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FormTareaController extends Controller
 {
@@ -27,6 +28,15 @@ class FormTareaController extends Controller
     public function listar()
     {
         $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(10);
+
+        return view('listaTareas', compact('tareas'));
+    }
+
+    public function listarOperario()
+    {
+        $tareas = Tarea::where('empleados_id', Auth::user()->id)
+            ->orderBy('fechaRealizacion', 'desc')
+            ->paginate(10);
         return view('listaTareas', compact('tareas'));
     }
 
@@ -71,15 +81,18 @@ class FormTareaController extends Controller
             'correo' => 'required|email',
             'anotacionesAnt' => '',
             'anotacionesPos' => '',
-            'ficheroResumen' => 'required|file',
+            'ficheroResumen' => 'file',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
         ]);
 
-        $ficheroResumen = request()->file('ficheroResumen');
-        $nombre_original = $ficheroResumen->getClientOriginalName();
-        $path = $ficheroResumen->storeAs('public/files', $nombre_original);
+        if (request()->hasFile('ficheroResumen')) {
 
-        $datos['ficheroResumen'] = $nombre_original;
+            $ficheroResumen = request()->file('ficheroResumen');
+            $nombre_original = $ficheroResumen->getClientOriginalName();
+            $path = $ficheroResumen->storeAs('public/files', $nombre_original);
+
+            $datos['ficheroResumen'] = $nombre_original;
+        }
 
         $tarea->update($datos);
         session()->flash('message', 'La tarea ha sido actualizada correctamente.');
@@ -97,17 +110,20 @@ class FormTareaController extends Controller
             'estado' => 'required',
             'anotacionesAnt' => '',
             'anotacionesPos' => '',
-            'ficheroResumen' => 'required|file',
+            'ficheroResumen' => 'file',
         ]);
 
-        $ficheroResumen = request()->file('ficheroResumen');
-        $nombre_original = $ficheroResumen->getClientOriginalName();
-        $path = $ficheroResumen->storeAs('public/files', $nombre_original);
+        if (request()->hasFile('ficheroResumen')) {
 
-        $datos['ficheroResumen'] = $nombre_original;
+            $ficheroResumen = request()->file('ficheroResumen');
+            $nombre_original = $ficheroResumen->getClientOriginalName();
+            $path = $ficheroResumen->storeAs('public/files', $nombre_original);
+
+            $datos['ficheroResumen'] = $nombre_original;
+        }
 
         $tarea->update($datos);
         session()->flash('message', 'La tarea ha sido completada correctamente.');
-        return redirect()->route('listaTareas');
+        return redirect()->route(Auth::check() && Auth::user()->es_admin === 1 ? 'listaTareas' : 'listaTareasOperario');
     }
 }

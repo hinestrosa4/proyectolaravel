@@ -64,7 +64,7 @@
                         <td>{{ $tarea->nombre }}</td>
                     </tr>
                     <tr>
-                        <td class="bold">Telefono:</td>
+                        <td class="bold">Teléfono:</td>
                         <td>{{ $tarea->telefono }}</td>
                     </tr>
                     <tr>
@@ -81,7 +81,15 @@
                     </tr>
                     <tr>
                     <td class="bold">Estado:</td>
-                        <td>{{ $tarea->estado }}</td>
+                    <td>
+                        @if ($tarea->estado === "P")
+                          Pendiente
+                        @elseif ($tarea->estado === "C")
+                          Cancelada
+                        @elseif ($tarea->estado === "R")
+                          Realizada
+                        @endif
+                      </td>
                     </tr>
                     <tr>
                         <td class="bold">Operario Encargado:</td>
@@ -130,6 +138,6 @@
                 </tbody>
             </table>
         </div>
-        <a href="{{ route('listaTareas') }}" class="btn btn-secondary" id="cancel-btn">Cancelar</a>
+        <a  href="{{ Auth::check() && Auth::user()->es_admin === 1 ? route('listaTareas') : route('listaTareasOperario') }}" class="btn btn-secondary" id="cancel-btn">Cancelar</a>
     </div>
 @endsection
