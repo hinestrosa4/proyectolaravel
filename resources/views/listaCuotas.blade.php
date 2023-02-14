@@ -55,23 +55,14 @@
                 </thead>
                 <tbody>
                     @foreach ($cuotas as $cuota)
-                        {{-- @if (!is_null($cuota->cliente) && is_null($cuota->cliente->deleted_at)) --}}
+                        @if (!is_null($cuota->cliente) && is_null($cuota->cliente->deleted_at))
                             <tr>
                                 <td>{{ $cuota->id }}</td>
-                                {{-- <td>{{ $cuota->cliente->cif }}</td> --}}
-                                <td>
-                                    @if (!is_null($cuota->cliente) && !is_null($cuota->cliente))
-                                    {{ $cuota->cliente->cif }}
-                                @else
-                                    Cliente no encontrado
-                                @endif
-                                
-                                </td>
+                                <td>{{ $cuota->cliente->cif }}</td>
                                 <td>{{ $cuota->concepto }}</td>
                                 <td>{{ date('d-m-Y', strtotime($cuota->fechaEmision)) }}</td>
                                 <td>{{ $cuota->importe }}€</td>
                                 <td>{{ $cuota->pagada }}</td>
-                                {{-- <td>{{ date('d-m-Y', strtotime($cuota->fechaPago)) }}</td> --}}
                                 <td>
                                     @if ($cuota->fechaPago)
                                         {{ date('d-m-Y', strtotime($cuota->fechaPago)) }}
@@ -80,9 +71,10 @@
                                 <td>{{ $cuota->notas }}</td>
                                 <td><a class="btn btn-danger" href="{{ route('confirmacionBorrarCuota', $cuota) }}">🗑️</a>
                                     <a class="btn btn-warning" href="{{ route('formCuotaEdit', $cuota->id) }}">✏️</a>
+                                    <a class="btn btn-success" href="{{ route('generatePDF', $cuota->id) }}">📋</a>
                                 </td>
                             </tr>
-                        {{-- @endif --}}
+                        @endif
                     @endforeach
                 </tbody>
             </table>

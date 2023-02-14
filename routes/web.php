@@ -14,6 +14,7 @@ use App\Http\Controllers\ValidarFormTareaController;
 use App\Http\Controllers\ValidarFormCuotaExcep;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FacturaController;
+use App\Mail\NosecaenMail;
 use Spatie\Permission\Models\Role;
 
 /*
@@ -32,8 +33,14 @@ Route::post('/', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 //Correo
-Route::get('/enviarCorreo', [FacturaController::class, 'enviarCorreo']);
+// Route::get('/email', function(){
+//     Mail::to('cliente@gmail.com')
+//          ->send(new NosecaenMail());
+// });
 
+//Factura
+// Route::get('/descargarFactura/{id}', FormMantenimientoController::class, 'descargarFactura')->name('descargarFactura');
+Route::get('/generatePDF/{id}', FacturaController::class)->name('generatePDF');
 
 // Route::middleware(['administrador'])->group(function () {
 

@@ -9,18 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MyTestEmail extends Mailable
+class NosecaenMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $subject = 'Mensaje Recibido';
+    public $msg;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(private $name)
+    public function __construct($message)
     {
-        //
+        $this->msg = $message;
     }
 
     /**
@@ -31,7 +34,7 @@ class MyTestEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'My Test Email',
+            subject: 'Nosecaen S.L',
         );
     }
 
@@ -43,8 +46,22 @@ class MyTestEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'test-email',
-            with: ['name' => $this->name],
+            view: 'email.bienvenido',
         );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array
+     */
+    public function attachments()
+    {
+        return [
+            [
+                'path' => $this->msg['archivo']->getRealPath(),
+                'as' => $this->msg['archivo']->getClientOriginalName(),
+            ],
+        ];
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Tarea;
 use App\Models\Cliente;
 use App\Models\Cuota;
 use Illuminate\Http\Request;
+use PDF;
 
 class FormMantenimientoController extends Controller
 {
@@ -56,30 +57,30 @@ class FormMantenimientoController extends Controller
     {
         $cuota->delete();
         session()->flash('message', 'La cuota ha sido borrada correctamente.');
-        return redirect()->route('listaCuotas','fechaEmision');
+        return redirect()->route('listaCuotas', 'fechaEmision');
     }
 
     public function edit($id)
     {
         $cuota = Cuota::findOrFail($id);
         $clientes = Cliente::all();
-        return view('formCuotaEdit', compact('cuota','clientes'));
+        return view('formCuotaEdit', compact('cuota', 'clientes'));
     }
 
     public function update(Cuota $cuota)
-{
-    $datos = request()->validate([
-        'clientes_id' => 'required',
-        'concepto' => 'required',
-        'fechaEmision' => 'required',
-        'importe' => 'required|numeric',
-        'pagada' => '',
-        'fechaPago' => 'required',
-        'notas' => 'required',
-    ]);
+    {
+        $datos = request()->validate([
+            'clientes_id' => 'required',
+            'concepto' => 'required',
+            'fechaEmision' => 'required',
+            'importe' => 'required|numeric',
+            'pagada' => '',
+            'fechaPago' => 'required',
+            'notas' => 'required',
+        ]);
 
-    $cuota->update($datos);
-    session()->flash('message', 'La cuota ha sido actualizada correctamente.');
-    return redirect()->route('listaCuotas','fechaEmision');
-}
+        $cuota->update($datos);
+        session()->flash('message', 'La cuota ha sido actualizada correctamente.');
+        return redirect()->route('listaCuotas', 'fechaEmision');
+    }
 }
