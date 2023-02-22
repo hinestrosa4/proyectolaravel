@@ -72,6 +72,7 @@
                                 <td><a class="btn btn-danger" href="{{ route('confirmacionBorrarCuota', $cuota) }}">🗑️</a>
                                     <a class="btn btn-warning" href="{{ route('formCuotaEdit', $cuota->id) }}">✏️</a>
                                     <a class="btn btn-success" href="{{ route('generatePDF', $cuota->id) }}">📋</a>
+                                    <a class="btn btn-info" href="{{ route('enviarCuotaCorreo', ['empleado' => Auth::user(), 'cuota' => $cuota]) }}">📧</a>
                                 </td>
                             </tr>
                         @endif

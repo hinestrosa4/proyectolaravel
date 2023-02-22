@@ -79,11 +79,11 @@
                                 </td>
                                 <td>
                                     @if (!is_null($tarea->empleado) && !is_null($tarea->empleado->deleted_at))
-                                        Empleado dado de baja
+                                        Operario no asignado
                                     @elseif (!is_null($tarea->empleado))
                                         {{ $tarea->empleado->nombre }}
                                     @else
-                                        Empleado no encontrado
+                                        Operario no asignado
                                     @endif
                                 </td>
                                 <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
@@ -95,7 +95,8 @@
                                     @endif
                                     @if (Auth::check() && Auth::user()->es_admin === 0)
                                         <a href="{{ route('formTareaCompletar', $tarea) }}" class="btn btn-success">✅</a>
-                                        <a href="{{ route('detallesTareaOperario', $tarea) }}" class="btn btn-primary">👁️‍🗨️</a>
+                                        <a href="{{ route('detallesTareaOperario', $tarea) }}"
+                                            class="btn btn-primary">👁️‍🗨️</a>
                                     @endif
                                 </td>
                             </tr>

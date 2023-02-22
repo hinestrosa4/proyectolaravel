@@ -95,11 +95,11 @@
                         <td class="bold">Operario Encargado:</td>
                         <td>
                             @if (!is_null($tarea->empleado) && !is_null($tarea->empleado->deleted_at))
-                            Empleado dado de baja
+                            Operario no asignado
                             @elseif (!is_null($tarea->empleado))
                                 {{ $tarea->empleado->nombre }}
                             @else
-                                Empleado no encontrado
+                            Operario no asignado
                             @endif
                         </td>
                     </tr>

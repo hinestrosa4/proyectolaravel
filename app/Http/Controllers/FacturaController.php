@@ -17,10 +17,10 @@ class FacturaController extends Controller
      */
     public function __invoke($id)
     {
-        $cuota = Cuota::findOrFail($id);
+        // $cuota = Cuota::findOrFail($id);
     
-        $pdf = PDF::loadView('factura', compact('cuota'));
+        // $pdf = PDF::loadView('factura', compact('cuota'));
     
-        return $pdf->download('factura_cuota_'.($id).'.pdf');
+        // return $pdf->download('factura_cuota_'.($id).'.pdf');
     }
 }

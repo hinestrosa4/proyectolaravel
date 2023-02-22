@@ -31,7 +31,7 @@ class LoginController extends Controller
             } else {
                 session(['operario' => $empleado->role]);
                 session(['hora_login' => $time]);
-                return redirect()->route('listaTareas');
+                return redirect()->route('listaTareasOperario');
             }
         }
 
