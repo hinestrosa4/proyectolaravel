@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Cuota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class ValidarFormCuotaExcep extends Controller
 {
@@ -24,7 +26,18 @@ class ValidarFormCuotaExcep extends Controller
             'notas' => 'required',
         ]);
 
-        Cuota::create($data);
+        $cuota = Cuota::create($data);
+
+        $email = 'hinestrosarafa@gmail.com';
+
+        $pdf = PDF::loadView('factura', compact('cuota'));
+        $pdf_content = $pdf->output();
+
+        Mail::send('email.cuotaPDF', ['empleado' => $data], function ($message) use ($email, $pdf_content) {
+            $message->to($email)
+                ->subject("Factura")
+                ->attachData($pdf_content, 'Factura.pdf');
+        });
 
         session()->flash('message', 'La cuota ha sido creada correctamente.');
 
