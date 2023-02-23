@@ -61,7 +61,7 @@
                                 <td>{{ $cuota->cliente->cif }}</td>
                                 <td>{{ $cuota->concepto }}</td>
                                 <td>{{ date('d-m-Y', strtotime($cuota->fechaEmision)) }}</td>
-                                <td>{{ $cuota->importe }}€</td>
+                                <td>{{ $cuota->importe }} {{ $cuota->cliente->moneda }}</td>
                                 <td>{{ $cuota->pagada }}</td>
                                 <td>
                                     @if ($cuota->fechaPago)

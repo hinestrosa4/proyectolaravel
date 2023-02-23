@@ -33,7 +33,7 @@ class ValidarFormCuotaExcep extends Controller
         $pdf = PDF::loadView('factura', compact('cuota'));
         $pdf_content = $pdf->output();
 
-        Mail::send('email.cuotaPDF', ['empleado' => $data], function ($message) use ($email, $pdf_content) {
+        Mail::send('email.cuotaPDF', ['cliente' => $data], function ($message) use ($email, $pdf_content) {
             $message->to($email)
                 ->subject("Factura")
                 ->attachData($pdf_content, 'Factura.pdf');

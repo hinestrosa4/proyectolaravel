@@ -33,7 +33,9 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <h2><a class="navbar-brand text-white" href="{{ route('listaTareas') }}">NOSECAEN S.L.</a></h2>
+            <h2><a class="navbar-brand text-white"
+                    href="{{ Auth::check() && Auth::user()->es_admin === 1 ? route('listaTareas') : route('listaTareasOperario') }}">NOSECAEN
+                    S.L.</a></h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -88,7 +90,8 @@
         <div>
             @if (Auth::check())
                 <p style="color:white;margin-left:-30%">
-                    <b>Nombre:</b> <a href="{{ route('formMiCuenta', Auth::user()->id) }}" style="text-decoration: none; color: inherit;">{{ Auth::user()->nombre }}</a>
+                    <b>Nombre:</b> <a href="{{ route('formMiCuenta', Auth::user()->id) }}"
+                        style="text-decoration: none; color: inherit;">{{ Auth::user()->nombre }}</a>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <img src="{{ Storage::url('public/images/log_out.png') }}" width="40px">

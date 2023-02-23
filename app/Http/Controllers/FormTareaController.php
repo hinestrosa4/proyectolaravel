@@ -21,7 +21,8 @@ class FormTareaController extends Controller
     {
         $clientes = Cliente::all();
         $provincias = Provincia::all();
-        $empleados = Empleado::all();
+        $empleados = Empleado::whereNotNull('nif')->get();
+        //$empleados = Empleado::all();
         return view('formTarea', compact('clientes', 'provincias', 'empleados'));
     }
 
@@ -61,7 +62,8 @@ class FormTareaController extends Controller
     {
         $clientes = Cliente::all();
         $provincias = Provincia::all();
-        $empleados = Empleado::all();
+        $empleados = Empleado::whereNotNull('nif')->get();
+        //$empleados = Empleado::all();
         return view('formTareaEdit', compact('tarea', 'clientes', 'provincias', 'empleados'));
     }
 

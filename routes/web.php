@@ -19,7 +19,7 @@ use App\Http\Controllers\FormIncidenciaClienteController;
 use App\Http\Controllers\RecuperarPassController;
 use App\Http\Controllers\ValidarIncidenciaCliente;
 use App\Http\Controllers\MiCuentaController;
-
+use App\Http\Controllers\GitHubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +52,9 @@ Route::get('/enviarCuotaCorreo/{empleado}/{cuota}', [EmailController::class, 'en
 //Factura
 Route::get('/generatePDF/{id}', FacturaController::class)->name('generatePDF');
 
+//Inicio de sesion con Github
+Route::get('/github', [GitHubController::class, 'redirectToProvider'])->name('github');
+Route::get('/githubcallback', [GitHubController::class, 'handleProviderCallback'])->name('githubcallback');
 
 Route::middleware(['auth'])->group(function () {
 
