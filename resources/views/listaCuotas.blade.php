@@ -73,6 +73,7 @@
                                     <a class="btn btn-warning" href="{{ route('formCuotaEdit', $cuota->id) }}">✏️</a>
                                     <a class="btn btn-success" href="{{ route('generatePDF', $cuota->id) }}">📋</a>
                                     <a class="btn btn-info" href="{{ route('enviarCuotaCorreo', ['empleado' => Auth::user(), 'cuota' => $cuota]) }}">📧</a>
+                                    <a class="btn btn-primary" href="{{ route('formularioPaypal', $cuota) }}"><i class="bi bi-paypal"></i></a>
                                 </td>
                             </tr>
                         @endif

@@ -20,6 +20,7 @@ use App\Http\Controllers\RecuperarPassController;
 use App\Http\Controllers\ValidarIncidenciaCliente;
 use App\Http\Controllers\MiCuentaController;
 use App\Http\Controllers\GitHubController;
+use App\Http\Controllers\PayPalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/formMiCuentaUpdate/{empleado}', [MiCuentaController::class, 'update'])->name('formMiCuentaUpdate');
 
     Route::middleware(['administrador'])->group(function () {
+
+        /*---------- PayPal ----------*/
+        Route::get('/paypal/pagar', [PayPalController::class, 'pagarConPaypal'])->name('formularioPaypal');
+        Route::get('/paypal/status', [PayPalController::class, 'paypalStatus'])->name('paypalStatus');
+
         /*---------- EMPLEADO ----------*/
         Route::get('/formRegEmpleado', FormEmpleadosController::class)->name('formRegEmpleado');
         Route::post('formRegEmpleado', [ValidarFormRegEmpleadoController::class, 'store']);
