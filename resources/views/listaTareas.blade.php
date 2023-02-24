@@ -89,14 +89,14 @@
                                 <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
                                 <td>
                                     @if (Auth::check() && Auth::user()->es_admin === 1)
-                                        <a class="btn btn-danger" href="{{ route('confirmacionBorrar', $tarea) }}">🗑️</a>
-                                        <a href="{{ route('formTareaEdit', $tarea) }}" class="btn btn-warning">✏️</a>
-                                        <a href="{{ route('verDetalles', $tarea) }}" class="btn btn-primary">👁️‍🗨️</a>
+                                        <a class="btn btn-danger" href="{{ route('confirmacionBorrar', $tarea) }}"><i class="bi bi-trash"></i></a>
+                                        <a href="{{ route('formTareaEdit', $tarea) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                        <a href="{{ route('verDetalles', $tarea) }}" class="btn btn-primary"><i class="bi bi-eye"></i></a>
                                     @endif
                                     @if (Auth::check() && Auth::user()->es_admin === 0)
-                                        <a href="{{ route('formTareaCompletar', $tarea) }}" class="btn btn-success">✅</a>
+                                        <a href="{{ route('formTareaCompletar', $tarea) }}" class="btn btn-success"><i class="bi bi-check-square"></i></a>
                                         <a href="{{ route('detallesTareaOperario', $tarea) }}"
-                                            class="btn btn-primary">👁️‍🗨️</a>
+                                            class="btn btn-primary"><i class="bi bi-eye"></i></a>
                                     @endif
                                 </td>
                             </tr>

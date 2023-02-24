@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Cuota;
 
 use Illuminate\Http\Request;
@@ -78,8 +79,8 @@ class PayPalController extends Controller
         $token = $request->input('token');
 
         if (!$paymentId || !$payerId || !$token) {
-            $status = 'No se pudo proceder con el pago a través de PayPal.'; //Cambiar el redirect y poner el session message verde de exito
-            return redirect()->route('listaCuotas', 'fechaEmision')->with(compact('status'));
+            session()->flash('error', 'No se pudo proceder con el pago a través de PayPal.');
+            return redirect()->route('listaCuotas', 'fechaEmision');
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -88,16 +89,16 @@ class PayPalController extends Controller
         $execution->setPayerId($payerId);
 
         $result = $payment->execute($execution, $this->apiContext);
-        
+
         //dd($result);
 
         if ($result->getState() === 'approved') {
-            $status = 'Gracias! El pago a través de PayPal se ha realizado correctamente.'; 
+            session()->flash('message', 'Gracias! El pago a través de PayPal se ha realizado correctamente.');
             //Cambiar el redirect y poner el session message verde de exito
-            return redirect()->route('listaCuotas', 'fechaEmision')->with(compact('status'));
+            return redirect()->route('listaCuotas', 'fechaEmision');
         }
 
-        $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.'; //Cambiar el redirect y poner el session error rojo de exito
-        return redirect()->route('listaCuotas', 'fechaEmision')->with(compact('status'));
+        session()->flash('error', 'Lo sentimos! El pago a través de PayPal no se pudo realizar.');
+        return redirect()->route('listaCuotas', 'fechaEmision');
     }
 }

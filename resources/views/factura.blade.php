@@ -33,58 +33,26 @@
                     </tr>
                     <tr>
                         <td><b>Importe:</b></td>
-                        <td>{{ $cuota->importe }}€</td>
+                        <td>{{ $cuota->importe }} {{ $cuota->cliente->moneda }}</td>
                     </tr>
-                    <tr>
-                        <td><b>Importe (en AFN):</b></td>
-                        <td>
-                            <?php
-                            use GuzzleHttp\Client;
-                            
-                            // Crea una instancia de cliente de Guzzle
-                            $client = new Client();
-                            
-                            // URL base para la API de Exchange Rates
-                            $base_url = 'https://api.exchangeratesapi.io/latest';
-                            
-                            // Monedas de origen y destino para la conversión
-                            $source_currency = 'EUR';
-                            $target_currency = 'USD';
-                            
-                            // Parámetros de consulta para la solicitud GET a la API
-                            $params = [
-                                'base' => $source_currency,
-                                'symbols' => $target_currency,
-                            ];
-                            
-                            // Envía la solicitud GET a la API y recibe la respuesta JSON
-                            $response = $client
-                                ->request('GET', $base_url, [
-                                    'query' => $params,
-                                ])
-                                ->getBody()
-                                ->getContents();
-                            
-                            // Procesa la respuesta JSON para obtener la tasa de conversión
-                            $exchange_rates = json_decode($response, true);
-                            $conversion_rate = $exchange_rates['rates'][$target_currency];
-                            
-                            // Realiza la conversión de EUR a USD
-                            $converted_amount = $cuota->importe * $conversion_rate;
-                            
-                            // Muestra el resultado de la conversión
-                            echo $converted_amount . ' ' . $target_currency;
-                            
-                            ?>
-                        </td>
-                    </tr>
+                    @if ($tipo_cambio != '')
+                        <tr>
+                            <td><b>Fecha de conversión</b></td>
+                            <td>{{ date('d-m-Y', strtotime($tipo_cambio['fecha_conversion'])) }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Importe moneda local</b></td>
+                            <td>{{ $tipo_cambio['importe_api'] }} €</td>
+                        </tr>
+                    @endif
                     <tr>
                         <td><b>Pagada:</b></td>
                         <td>{{ $cuota->pagada }}</td>
                     </tr>
                     <tr>
                         <td><b>Fecha Pago:</b></td>
-                        <td>{{ date('d-m-Y', strtotime($cuota->fechaPago)) }}</td>
+                        <td>{{ !empty($cuota->fechaPago) ? date('d-m-Y', strtotime($cuota->fechaPago)) : ' ' }}</td>
+
                     </tr>
                     <tr>
                         <td><b>Notas:</td>

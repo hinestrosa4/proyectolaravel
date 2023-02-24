@@ -30,6 +30,11 @@
                 {{ session()->get('message') }}
             </div>
         @endif
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
 
         <div style="text-align: center">
             <a class="btn btn-outline-dark" href="{{ route('listaCuotas', ['SI']) }}">Pagadas</a>
@@ -69,10 +74,10 @@
                                     @endif
                                 </td>
                                 <td>{{ $cuota->notas }}</td>
-                                <td><a class="btn btn-danger" href="{{ route('confirmacionBorrarCuota', $cuota) }}">🗑️</a>
-                                    <a class="btn btn-warning" href="{{ route('formCuotaEdit', $cuota->id) }}">✏️</a>
-                                    <a class="btn btn-success" href="{{ route('generatePDF', $cuota->id) }}">📋</a>
-                                    <a class="btn btn-info" href="{{ route('enviarCuotaCorreo', ['empleado' => Auth::user(), 'cuota' => $cuota]) }}">📧</a>
+                                <td><a class="btn btn-danger" href="{{ route('confirmacionBorrarCuota', $cuota) }}"><i class="bi bi-trash"></i></a>
+                                    <a class="btn btn-warning" href="{{ route('formCuotaEdit', $cuota->id) }}"><i class="bi bi-pencil-square"></i></a>
+                                    <a class="btn btn-success" href="{{ route('generatePDF', $cuota->id) }}"><i class="bi bi-filetype-pdf"></i></a>
+                                    <a class="btn btn-info" href="{{ route('enviarCuotaCorreo', ['empleado' => Auth::user(), 'cuota' => $cuota]) }}"><i class="bi bi-envelope-at"></i></a>
                                     <a class="btn btn-primary" href="{{ route('formularioPaypal', $cuota) }}"><i class="bi bi-paypal"></i></a>
                                 </td>
                             </tr>
